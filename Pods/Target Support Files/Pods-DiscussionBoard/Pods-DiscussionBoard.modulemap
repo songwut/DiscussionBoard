@@ -1,0 +1,6 @@
+framework module Pods_DiscussionBoard {
+  umbrella header "Pods-DiscussionBoard-umbrella.h"
+
+  export *
+  module * { export * }
+}
