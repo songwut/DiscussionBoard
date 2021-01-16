@@ -530,6 +530,7 @@ extension String {
     var data: Data {
         return Data(utf8)
     }
+    
     var html2AttributedString: NSAttributedString? {
         do {
             // Create audio player object
@@ -542,6 +543,16 @@ extension String {
             return nil
         }
         
+    }
+    
+    func html2Atb(font: UIFont) -> NSAttributedString? {
+        let modifiedFont = String(format:"<span style=\"font-family: '\(font.fontName)'; font-size: \(font.pointSize)\">%@</span>", self)
+
+        let attrStr = try! NSAttributedString(
+            data: modifiedFont.data(using: .unicode, allowLossyConversion: true)!,
+            options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue],
+            documentAttributes: nil)
+        return attrStr
     }
     
     var html2String: String {

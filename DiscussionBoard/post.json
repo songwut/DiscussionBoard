@@ -70,7 +70,7 @@
         },
         {
           "id": 2,
-          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>",
+          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b><br/>some",
           "parent": 1,
           "is_edited": false,
           "is_deletable": true,
@@ -100,7 +100,7 @@
         },
         {
           "id": 3,
-          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>",
+          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus nibh a egestas facilisis. Aliquam sem erat, laoreet ut leo a, facilisis mattis leo.",
           "parent": 1,
           "is_edited": false,
           "is_deletable": true,

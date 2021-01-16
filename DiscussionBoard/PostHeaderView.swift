@@ -13,6 +13,13 @@ class PostHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var linkLabel: UILabel!
+    @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var linkButton: UIButton!
+    
+    let textViewFont = FontHelper.getFontSystem(.small, font: .text)
+    
     var post: DiscussionPostResult? {
         didSet {
             if let post = self.post {
@@ -20,8 +27,8 @@ class PostHeaderView: UITableViewHeaderFooterView {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
                     self.authorNameLabel.text = author.name
                 }
-                self.textView.attributedText = post.body.html2AttributedString
-                
+                let font = self.textView.font ?? textViewFont
+                self.textView.attributedText = post.body.html2Atb(font: font)
             }
         }
     }
@@ -32,8 +39,9 @@ class PostHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
-        self.textView.font = FontHelper.getFontSystem(.small, font: .text)
+        self.textView.font = textViewFont
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(_:))))
     }
     

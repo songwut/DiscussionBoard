@@ -13,6 +13,13 @@ class ReplyTableViewCell: UITableViewCell {
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var linkLabel: UILabel!
+    @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var linkButton: UIButton!
+    
+    let textViewFont = FontHelper.getFontSystem(.small, font: .text)
+    
     var reply: DiscussionReplyResult? {
         didSet {
             if let reply = self.reply {
@@ -20,7 +27,8 @@ class ReplyTableViewCell: UITableViewCell {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
                     self.authorNameLabel.text = author.name
                 }
-                self.textView.attributedText = reply.body.html2AttributedString
+                let font = self.textView.font ?? textViewFont
+                self.textView.attributedText = reply.body.html2Atb(font: font)
                 
             }
         }
@@ -28,8 +36,9 @@ class ReplyTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
-        self.textView.font = FontHelper.getFontSystem(.small, font: .text)
+        self.textView.font = textViewFont
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

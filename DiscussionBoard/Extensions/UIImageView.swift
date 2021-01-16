@@ -17,6 +17,13 @@ extension UIImageView {
      Make layer of UIImageView to be circle (use height)
      */
     
+    func setCircle() {
+        self.updateLayout()
+        let w = self.bounds.width
+        self.clipsToBounds = true
+        self.layer.cornerRadius = w / 2
+    }
+    
     func setTintWith(color: UIColor) {
         if let _ = self.image {
             self.image? = (self.image?.withRenderingMode(.alwaysTemplate))!
