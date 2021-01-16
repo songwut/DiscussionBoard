@@ -52,6 +52,130 @@
           "author_role": "User",
           "author": {
             "id": 1,
+            "name": "Reply 1",
+            "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+          },
+          "mentioned_list": [
+            {
+              "id": 1,
+              "name": "Name"
+            }
+          ],
+          "image_list": [
+            {
+              "id": 1,
+              "name": "image_url"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>",
+          "parent": 1,
+          "is_edited": false,
+          "is_deletable": true,
+          "is_editable": true,
+          "is_liked": false,
+          "count_likes": 99,
+          "datetime_create": "datetime_create",
+          "datetime_update": "datetime_update",
+          "author_role": "User",
+          "author": {
+            "id": 1,
+            "name": "Reply 2",
+            "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+          },
+          "mentioned_list": [
+            {
+              "id": 1,
+              "name": "Name"
+            }
+          ],
+          "image_list": [
+            {
+              "id": 1,
+              "name": "image_url"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>",
+          "parent": 1,
+          "is_edited": false,
+          "is_deletable": true,
+          "is_editable": true,
+          "is_liked": false,
+          "count_likes": 99,
+          "datetime_create": "datetime_create",
+          "datetime_update": "datetime_update",
+          "author_role": "User",
+          "author": {
+            "id": 1,
+            "name": "Reply 3",
+            "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+          },
+          "mentioned_list": [
+            {
+              "id": 1,
+              "name": "Name"
+            }
+          ],
+          "image_list": [
+            {
+              "id": 1,
+              "name": "image_url"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "body": "<b><i>หนา เอียง TEST SOME TEXT</i></b> and <b>ตัวหนา BOLD</b> recalcurate วิดีโอที่ ค่ะช่วงท้ายๆ ทำไมข้อมูลอยู่ๆงอกมาเป็นตรงกลางอะคะ รบกวนอธิบายละเอียดอีกทีได้ไหม",
+      "parent": null,
+      "is_edited": false,
+      "is_deletable": true,
+      "is_editable": true,
+      "is_pinned": false,
+      "is_liked": false,
+      "count_likes": 99,
+      "count_replies": 1,
+      "datetime_create": "datetime_create",
+      "datetime_update": "datetime_update",
+      "author_role": "Instructor",
+      "author": {
+        "id": 1,
+        "name": "ชื่อไทย",
+        "image": "https://robohash.org/ae281cb450735a7bb54b52f3d4cf230b?set=set4&bgset=&size=400x400"
+      },
+      "mentioned_list": [
+        {
+          "id": 1,
+          "name": "Name"
+        }
+      ],
+      "image_list": [
+        {
+          "id": 1,
+          "name": "image_url"
+        }
+      ],
+      "reply_list": [
+        {
+          "id": 2,
+          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>",
+          "parent": 1,
+          "is_edited": false,
+          "is_deletable": true,
+          "is_editable": true,
+          "is_liked": false,
+          "count_likes": 99,
+          "datetime_create": "datetime_create",
+          "datetime_update": "datetime_update",
+          "author_role": "User",
+          "author": {
+            "id": 1,
             "name": "Avatar2",
             "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
           },

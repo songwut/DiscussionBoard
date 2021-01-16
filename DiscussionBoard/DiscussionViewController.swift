@@ -25,11 +25,10 @@ class DiscussionViewController: UIViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedSectionHeaderHeight = 10.0
         self.tableView.estimatedRowHeight = 10.0
-        self.tableView.separatorStyle = .singleLine
+        self.tableView.separatorStyle = .none
         self.tableView?.tableHeaderView = self.postHeader()
         self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         self.tableView.rx.setDataSource(self).disposed(by: disposeBag)
-        
         self.viewModel.prepareData {
             self.tableView.reloadData()
         }

@@ -7,8 +7,9 @@
 
 import UIKit
 
-let themeColor = UIColor(hex: "EA2427")
+let primaryColor = UIColor(hex: "EA2427")
 let grayColor = UIColor(hex: "ECECED")
+let secondaryColor = UIColor(hex: "8F9295")
 var coverImageRatio:Float = 9 / 16
 
 let fontConicleText = "IBMPlexSansThai-Text"

@@ -16,8 +16,10 @@ class ReplyTableViewCell: UITableViewCell {
     var reply: DiscussionReplyResult? {
         didSet {
             if let reply = self.reply {
-                //if let author = reply.author
-                //self.authorImageView.setim
+                if let author = reply.author {
+                    self.authorImageView.setImage(author.image, placeholderImage: nil)
+                    self.authorNameLabel.text = author.name
+                }
                 self.textView.attributedText = reply.body.html2AttributedString
                 
             }
@@ -26,7 +28,8 @@ class ReplyTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
+        self.textView.font = FontHelper.getFontSystem(.small, font: .text)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

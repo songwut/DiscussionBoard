@@ -16,8 +16,10 @@ class PostHeaderView: UITableViewHeaderFooterView {
     var post: DiscussionPostResult? {
         didSet {
             if let post = self.post {
-                //if let author = post.author
-                //self.authorImageView.setim
+                if let author = post.author {
+                    self.authorImageView.setImage(author.image, placeholderImage: nil)
+                    self.authorNameLabel.text = author.name
+                }
                 self.textView.attributedText = post.body.html2AttributedString
                 
             }
