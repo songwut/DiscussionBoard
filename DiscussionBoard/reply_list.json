@@ -1,0 +1,124 @@
+{
+  "results": [
+      {
+        "id": 1,
+        "body": "Reply<b>1</b>",
+        "parent": 1,
+        "is_edited": false,
+        "is_deletable": true,
+        "is_editable": true,
+        "is_liked": false,
+        "count_likes": 99,
+        "datetime_create": "datetime_create",
+        "datetime_update": "datetime_update",
+        "author_role": "User",
+        "author": {
+          "id": 1,
+          "name": "Reply 1",
+          "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+        },
+        "mentioned_list": [
+          {
+            "id": 1,
+            "name": "Name"
+          }
+        ],
+        "image_list": [
+          {
+            "id": 1,
+            "name": "image_url"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "body": "Reply<b>2</b>",
+        "parent": 1,
+        "is_edited": false,
+        "is_deletable": true,
+        "is_editable": true,
+        "is_liked": false,
+        "count_likes": 99,
+        "datetime_create": "datetime_create",
+        "datetime_update": "datetime_update",
+        "author_role": "User",
+        "author": {
+          "id": 1,
+          "name": "Reply 1",
+          "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+        },
+        "mentioned_list": [
+          {
+            "id": 1,
+            "name": "Name"
+          }
+        ],
+        "image_list": [
+          {
+            "id": 1,
+            "name": "image_url"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "body": "Reply<b>3</b>",
+        "parent": 1,
+        "is_edited": false,
+        "is_deletable": true,
+        "is_editable": true,
+        "is_liked": false,
+        "count_likes": 99,
+        "datetime_create": "datetime_create",
+        "datetime_update": "datetime_update",
+        "author_role": "User",
+        "author": {
+          "id": 1,
+          "name": "Reply 1",
+          "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+        },
+        "mentioned_list": [
+          {
+            "id": 1,
+            "name": "Name"
+          }
+        ],
+        "image_list": [
+          {
+            "id": 1,
+            "name": "image_url"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "body": "Reply<b>4</b>",
+        "parent": 1,
+        "is_edited": false,
+        "is_deletable": true,
+        "is_editable": true,
+        "is_liked": false,
+        "count_likes": 99,
+        "datetime_create": "datetime_create",
+        "datetime_update": "datetime_update",
+        "author_role": "User",
+        "author": {
+          "id": 1,
+          "name": "Reply 1",
+          "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
+        },
+        "mentioned_list": [
+          {
+            "id": 1,
+            "name": "Name"
+          }
+        ],
+        "image_list": [
+          {
+            "id": 1,
+            "name": "image_url"
+          }
+        ]
+      }
+  ]
+}

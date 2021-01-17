@@ -24,6 +24,20 @@ class DiscussionBoardPageResult: PageResult {
     }
 }
 
+class DiscussionReplyListResult: BaseResult {
+    
+    var list = [DiscussionReplyResult]()
+    
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        list             <- map["results"]
+    }
+}
+
 // MARK: - DiscussionPostResult
 class DiscussionPostResult: BaseResult {
     
@@ -41,9 +55,13 @@ class DiscussionPostResult: BaseResult {
     var authorRole = ""
     var author: AuthorResult?
     var replyList = [DiscussionReplyResult]()
+    
     //var mentionedList: [List]
     //var imageList: [List]
     
+    func isReplyFull() -> Bool {
+        return self.replyList.count == self.countReplies
+    }
 
     required init?(map: Map) {
         super.init(map: map)

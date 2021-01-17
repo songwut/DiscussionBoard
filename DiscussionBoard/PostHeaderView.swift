@@ -7,6 +7,8 @@
 
 import UIKit
 
+let maxReplyList = 2
+
 class PostHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var textView: UITextView!
@@ -18,7 +20,12 @@ class PostHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var linkButton: UIButton!
     
+    @IBOutlet weak var seeMoreReplyButton: UIButton!
+    
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
+    var isReplyAll = false
+    var didReload: DidAction?
+    var replyList:[DiscussionReplyResult]?
     
     var post: DiscussionPostResult? {
         didSet {
@@ -29,6 +36,14 @@ class PostHeaderView: UITableViewHeaderFooterView {
                 }
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
+                self.isReplyAll = post.isReplyFull()
+                if post.countReplies > maxReplyList {
+                    if self.isReplyAll  {
+                        self.seeMoreReplyButton.isHidden = true
+                    } else {
+                        self.seeMoreReplyButton.isHidden = false
+                    }
+                }
             }
         }
     }
@@ -39,6 +54,7 @@ class PostHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.seeMoreReplyButton.isHidden = true
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
@@ -46,7 +62,9 @@ class PostHeaderView: UITableViewHeaderFooterView {
     }
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {
-        
+        self.isReplyAll = true
+        self.seeMoreReplyButton.isHidden = true
+        self.didReload?.handler(self)
     }
 
     @objc func tapIconHeader(_ gestureRecognizer: UITapGestureRecognizer) {

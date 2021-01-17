@@ -13,30 +13,65 @@ import RxDataSources
 class DiscussionViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    
+    weak var postVC:DiscussionPostViewController!
 
+    var postView: UIView!
     private let disposeBag = DisposeBag()
     private let viewModel = DiscussionViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "PostHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellPost")
+        self.tableView.register(UINib(nibName: "PostFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellFooterReply")
+        
         self.tableView.register(UINib(nibName: "ReplyTableViewCell", bundle: nil), forCellReuseIdentifier: "cellReply")
         self.tableView.sectionHeaderHeight = UITableView.automaticDimension
+        self.tableView.sectionFooterHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedSectionHeaderHeight = 10.0
+        self.tableView.estimatedSectionFooterHeight = 34.0
         self.tableView.estimatedRowHeight = 10.0
         self.tableView.separatorStyle = .none
-        self.tableView?.tableHeaderView = self.postHeader()
+        self.tableView.remembersLastFocusedIndexPath = true
         self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         self.tableView.rx.setDataSource(self).disposed(by: disposeBag)
+        
+        self.postView = self.createPostView()
+        self.postVC.didPost = DidAction(handler: { (sender) in
+            if let html = sender as? String {
+                self.viewModel.post(html: html) { (post) in
+                    self.reloadDirect()
+                }
+            }
+        })
+        self.tableView?.tableHeaderView = self.postView
         self.viewModel.prepareData {
             self.tableView.reloadData()
         }
     }
     
-    func postHeader() -> UIView {
-        //add child DiscussionPostViewController
-        return UIView()
+    func reloadDirect() {
+        UIView.performWithoutAnimation {
+            let loc = self.tableView.contentOffset
+            tableView.reloadData()
+            tableView.contentOffset = loc
+        }
+    }
+    
+    func createPostView() -> UIView {
+        self.postVC = (UIStoryboard(name: "Discussion", bundle: nil).instantiateViewController(withIdentifier: "DiscussionPostViewController") as! DiscussionPostViewController)
+        self.addChild(self.postVC)
+        self.postVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
+        self.postVC.didMove(toParent: self)
+        DispatchQueue.main.async {
+            let height = self.postVC.uiStackView.bounds.height
+            self.postVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: height)
+            self.postVC.didLoaded = DidAction(handler: { (sender) in
+                print("PostUI didLoaded")
+            })
+        }
+        return self.postVC.view
         
     }
     
@@ -83,10 +118,23 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
         let post = self.viewModel.postList[section]
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPost") as! PostHeaderView
         header.post = post
+        header.didReload = DidAction(handler: { (sender) in
+            self.viewModel.replyList(post: post) { (replyList) in
+                self.reloadDirect()
+            }
+        })
+        
         //header.setCollapsed(post.collapsed)
         //header.section = section
         //header.delegate = self
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        //let post = self.viewModel.postList[section]
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellFooterReply") as! PostFooterView
+        //header.post = post
+        return footer
     }
     
 }

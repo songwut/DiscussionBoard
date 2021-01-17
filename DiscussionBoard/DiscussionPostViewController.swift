@@ -10,8 +10,8 @@ import RichEditorView
 
 class DiscussionPostViewController: UIViewController {
 
+    @IBOutlet var uiStackView: UIStackView!
     @IBOutlet var editorView: RichEditorView!
-    @IBOutlet var htmlTextView: UITextView?
     @IBOutlet var editorToolStackView: UIStackView!
     @IBOutlet var editorToolView: UIView!
     
@@ -19,6 +19,9 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var italicButton: UIButton!
     @IBOutlet var underlineButton: UIButton!
     
+    var htmlContent: String?
+    var didLoaded: DidAction?
+    var didPost: DidAction?
     
     lazy var editorToolbar: RichEditorToolbar = {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
@@ -29,7 +32,7 @@ class DiscussionPostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.uiStackView.updateLayout()
         self.editorToolView.layer.borderWidth = 1
         self.editorToolView.layer.borderColor = grayColor.cgColor
         self.editorToolView.layer.cornerRadius = 4
@@ -63,7 +66,7 @@ class DiscussionPostViewController: UIViewController {
             toolbar.editor?.html = ""
         }
         */
-        
+        self.didLoaded?.handler(self)
     }
     
     func updateSelected(_ sender: UIButton) {
@@ -96,6 +99,16 @@ class DiscussionPostViewController: UIViewController {
         self.editorToolbar.editor?.underline()
         self.updateSelected(sender)
     }
+    
+    @IBAction func postPressed(_ sender: UIButton) {
+        if let textHtml = self.htmlContent {
+            print("textHtml:")
+            print(textHtml)
+        }
+        self.view.endEditing(true)
+        self.didPost?.handler(self.htmlContent)
+        self.editorView.html = ""
+    }
 
 }
 
@@ -103,9 +116,9 @@ extension DiscussionPostViewController: RichEditorDelegate {
 
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
         if content.isEmpty {
-            htmlTextView?.text = "HTML Preview"
+            self.htmlContent = nil
         } else {
-            htmlTextView?.text = content
+            self.htmlContent = content
         }
     }
     

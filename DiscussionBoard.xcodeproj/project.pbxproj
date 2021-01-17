@@ -63,6 +63,15 @@
 		69235A6825B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
 		69235A6925B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
 		69235A6A25B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
+		69D6818925B466830017F986 /* reply_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 69D6818825B466830017F986 /* reply_list.json */; };
+		69D6818A25B466830017F986 /* reply_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 69D6818825B466830017F986 /* reply_list.json */; };
+		69D6818B25B466830017F986 /* reply_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 69D6818825B466830017F986 /* reply_list.json */; };
+		69D6819325B499560017F986 /* PostFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6819225B499560017F986 /* PostFooterView.swift */; };
+		69D6819425B499560017F986 /* PostFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6819225B499560017F986 /* PostFooterView.swift */; };
+		69D6819525B499560017F986 /* PostFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6819225B499560017F986 /* PostFooterView.swift */; };
+		69D6819A25B499660017F986 /* PostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69D6819925B499660017F986 /* PostFooterView.xib */; };
+		69D6819B25B499660017F986 /* PostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69D6819925B499660017F986 /* PostFooterView.xib */; };
+		69D6819C25B499660017F986 /* PostFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69D6819925B499660017F986 /* PostFooterView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +128,9 @@
 		69235A3625B338C800F1880A /* IBMPlexSansThai-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansThai-Medium.ttf"; sourceTree = "<group>"; };
 		69235A4625B33AB700F1880A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		69235A6725B34C9600F1880A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		69D6818825B466830017F986 /* reply_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reply_list.json; sourceTree = "<group>"; };
+		69D6819225B499560017F986 /* PostFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFooterView.swift; sourceTree = "<group>"; };
+		69D6819925B499660017F986 /* PostFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostFooterView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +190,7 @@
 				692359B125B1A77900F1880A /* PublicSetting.swift */,
 				69235A0825B201F000F1880A /* Results.swift */,
 				69235A1925B3162E00F1880A /* JSON.swift */,
+				69D6818825B466830017F986 /* reply_list.json */,
 				69235A2025B316B000F1880A /* post.json */,
 				69235A6E25B34D0200F1880A /* Extensions */,
 				6923596D25B177A800F1880A /* ViewController.swift */,
@@ -185,6 +198,8 @@
 				692359F125B1FE8D00F1880A /* DiscussionViewModel.swift */,
 				69235A0125B201BE00F1880A /* DiscussionBoardPageResult.swift */,
 				692359BD25B1C27E00F1880A /* DiscussionPostViewController.swift */,
+				69D6819225B499560017F986 /* PostFooterView.swift */,
+				69D6819925B499660017F986 /* PostFooterView.xib */,
 				692359E025B1F74D00F1880A /* PostHeaderView.swift */,
 				69235A0F25B20D6C00F1880A /* PostHeaderView.xib */,
 				692359D525B1F64700F1880A /* ReplyTableViewCell.swift */,
@@ -361,10 +376,12 @@
 				692359DA25B1F64700F1880A /* ReplyTableViewCell.xib in Resources */,
 				692359C625B1C2F000F1880A /* Discussion.storyboard in Resources */,
 				69235A3725B338C900F1880A /* IBMPlexSansThai-Text.ttf in Resources */,
+				69D6819A25B499660017F986 /* PostFooterView.xib in Resources */,
 				6923597625B177AB00F1880A /* LaunchScreen.storyboard in Resources */,
 				69235A3A25B338C900F1880A /* IBMPlexSansThai-Bold.ttf in Resources */,
 				69235A2125B316B000F1880A /* post.json in Resources */,
 				69235A3D25B338C900F1880A /* IBMPlexSansThai-Medium.ttf in Resources */,
+				69D6818925B466830017F986 /* reply_list.json in Resources */,
 				6923597325B177AB00F1880A /* Assets.xcassets in Resources */,
 				6923597125B177A800F1880A /* Main.storyboard in Resources */,
 				69235A1025B20D6C00F1880A /* PostHeaderView.xib in Resources */,
@@ -375,8 +392,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D6818A25B466830017F986 /* reply_list.json in Resources */,
 				692359DB25B1F64700F1880A /* ReplyTableViewCell.xib in Resources */,
 				69235A3B25B338C900F1880A /* IBMPlexSansThai-Bold.ttf in Resources */,
+				69D6819B25B499660017F986 /* PostFooterView.xib in Resources */,
 				69235A1125B20D6C00F1880A /* PostHeaderView.xib in Resources */,
 				69235A3825B338C900F1880A /* IBMPlexSansThai-Text.ttf in Resources */,
 				69235A3E25B338C900F1880A /* IBMPlexSansThai-Medium.ttf in Resources */,
@@ -388,8 +407,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D6818B25B466830017F986 /* reply_list.json in Resources */,
 				692359DC25B1F64700F1880A /* ReplyTableViewCell.xib in Resources */,
 				69235A3C25B338C900F1880A /* IBMPlexSansThai-Bold.ttf in Resources */,
+				69D6819C25B499660017F986 /* PostFooterView.xib in Resources */,
 				69235A1225B20D6C00F1880A /* PostHeaderView.xib in Resources */,
 				69235A3925B338C900F1880A /* IBMPlexSansThai-Text.ttf in Resources */,
 				69235A3F25B338C900F1880A /* IBMPlexSansThai-Medium.ttf in Resources */,
@@ -461,6 +482,7 @@
 				692359AD25B1A69400F1880A /* Extension.swift in Sources */,
 				692359E125B1F74D00F1880A /* PostHeaderView.swift in Sources */,
 				692359BE25B1C27E00F1880A /* DiscussionPostViewController.swift in Sources */,
+				69D6819325B499560017F986 /* PostFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +493,7 @@
 				69235A4825B33AB700F1880A /* UIImageView.swift in Sources */,
 				69235A0A25B201F000F1880A /* Results.swift in Sources */,
 				69235A1B25B3162E00F1880A /* JSON.swift in Sources */,
+				69D6819425B499560017F986 /* PostFooterView.swift in Sources */,
 				69235A0325B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,
 				692359F325B1FE8E00F1880A /* DiscussionViewModel.swift in Sources */,
 				692359D825B1F64700F1880A /* ReplyTableViewCell.swift in Sources */,
@@ -487,6 +510,7 @@
 				69235A4925B33AB700F1880A /* UIImageView.swift in Sources */,
 				69235A0B25B201F000F1880A /* Results.swift in Sources */,
 				69235A1C25B3162E00F1880A /* JSON.swift in Sources */,
+				69D6819525B499560017F986 /* PostFooterView.swift in Sources */,
 				69235A0425B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,
 				692359F425B1FE8E00F1880A /* DiscussionViewModel.swift in Sources */,
 				692359D925B1F64700F1880A /* ReplyTableViewCell.swift in Sources */,

@@ -16,7 +16,7 @@
       "is_pinned": false,
       "is_liked": false,
       "count_likes": 99,
-      "count_replies": 1,
+      "count_replies": 4,
       "datetime_create": "datetime_create",
       "datetime_update": "datetime_update",
       "author_role": "Instructor",
@@ -83,36 +83,6 @@
           "author": {
             "id": 1,
             "name": "Reply 2",
-            "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
-          },
-          "mentioned_list": [
-            {
-              "id": 1,
-              "name": "Name"
-            }
-          ],
-          "image_list": [
-            {
-              "id": 1,
-              "name": "image_url"
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "body": "Reply<b><i>testd sdadaw </i></b> <b>dsesfdsfs</b>orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus nibh a egestas facilisis. Aliquam sem erat, laoreet ut leo a, facilisis mattis leo.",
-          "parent": 1,
-          "is_edited": false,
-          "is_deletable": true,
-          "is_editable": true,
-          "is_liked": false,
-          "count_likes": 99,
-          "datetime_create": "datetime_create",
-          "datetime_update": "datetime_update",
-          "author_role": "User",
-          "author": {
-            "id": 1,
-            "name": "Reply 3",
             "image": "https://robohash.org/c56fbe042d71b8a0efc7daa9d55793b6?set=set4&bgset=&size=400x400"
           },
           "mentioned_list": [

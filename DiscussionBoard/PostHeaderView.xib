@@ -206,6 +206,7 @@
                 <outlet property="linkButton" destination="TKs-bG-Qlr" id="ADJ-tU-Ofk"/>
                 <outlet property="linkLabel" destination="uTF-Nc-KJW" id="FHf-dN-6EM"/>
                 <outlet property="replyLabel" destination="gVx-k7-MyL" id="bow-Vm-KMG"/>
+                <outlet property="seeMoreReplyButton" destination="j7H-jk-7Gw" id="oEK-mg-k6w"/>
                 <outlet property="textView" destination="37x-ah-7T1" id="dnP-Y8-HCt"/>
             </connections>
             <point key="canvasLocation" x="89.855072463768124" y="-119.53125"/>
