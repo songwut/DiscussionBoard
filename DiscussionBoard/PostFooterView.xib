@@ -249,6 +249,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="editorView" destination="EUK-94-9aE" id="at0-zD-C7S"/>
+                <outlet property="replyAuthorImageView" destination="jPW-rY-gjL" id="oBk-Hz-28X"/>
                 <outlet property="replyButton" destination="oKw-rd-7pa" id="5mR-1l-bFC"/>
                 <outlet property="replyView" destination="F6M-Xp-7L8" id="JAB-WF-c0R"/>
             </connections>

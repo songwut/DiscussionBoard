@@ -418,6 +418,7 @@
                 <outlet property="authorImageView" destination="9ia-Cz-sci" id="h5s-ZN-Oec"/>
                 <outlet property="authorNameLabel" destination="zfg-te-mPo" id="bTB-uX-uVs"/>
                 <outlet property="dateLabel" destination="WP3-gx-caX" id="qt8-Re-vR5"/>
+                <outlet property="editorView" destination="jpS-Fw-DK3" id="Jm0-3g-fqj"/>
                 <outlet property="linkButton" destination="w0a-FN-NcP" id="AIc-CD-7OO"/>
                 <outlet property="linkLabel" destination="i82-uy-pSI" id="0Si-Lr-L7Z"/>
                 <outlet property="pinImageView" destination="sQt-cr-5jM" id="odY-Gm-MF1"/>

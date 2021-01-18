@@ -12,22 +12,27 @@ class PostFooterView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var replyView: UIView!
+    @IBOutlet weak var replyAuthorImageView: UIImageView!
     @IBOutlet var editorView: RichEditorView!
     
     class func instanciateFromNib() -> PostFooterView {
         return Bundle.main.loadNibNamed("PostFooterView", owner: nil, options: nil)![0] as! PostFooterView
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    var replyAuthor: AuthorResult? {
+        didSet {
+            if let replyAuthor = self.replyAuthor {
+                self.replyAuthorImageView.setImage(replyAuthor.image, placeholderImage: nil)
+                
+            }
+        }
     }
-    */
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.replyView.isHidden = true
+        self.replyView.isHidden = true
+        self.replyAuthorImageView.setCircle()
     }
 
 }

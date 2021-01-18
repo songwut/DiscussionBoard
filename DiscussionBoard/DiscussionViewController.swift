@@ -147,8 +147,9 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        //let post = self.viewModel.postList[section]
+        let post = self.viewModel.postList[section]
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellFooterReply") as! PostFooterView
+        footer.replyAuthor = post.author
         //header.post = post
         return footer
     }
