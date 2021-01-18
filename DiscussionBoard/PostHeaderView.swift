@@ -36,12 +36,17 @@ class PostHeaderView: UITableViewHeaderFooterView {
                 }
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
-                self.isReplyAll = post.isReplyFull()
-                if post.countReplies > maxReplyList {
-                    if self.isReplyAll  {
-                        self.seeMoreReplyButton.isHidden = true
-                    } else {
-                        self.seeMoreReplyButton.isHidden = false
+                
+                if post.isPinned {// hide when pin
+                    self.seeMoreReplyButton.isHidden = true
+                } else {
+                    self.isReplyAll = post.isReplyFull()
+                    if post.countReplies > maxReplyList {
+                        if self.isReplyAll  {
+                            self.seeMoreReplyButton.isHidden = true
+                        } else {
+                            self.seeMoreReplyButton.isHidden = false
+                        }
                     }
                 }
             }

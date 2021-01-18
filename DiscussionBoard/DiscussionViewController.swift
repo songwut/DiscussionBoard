@@ -22,6 +22,8 @@ class DiscussionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.register(UINib(nibName: "PostPinHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellPostPin")
         self.tableView.register(UINib(nibName: "PostHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellPost")
         self.tableView.register(UINib(nibName: "PostFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellFooterReply")
         
@@ -116,18 +118,32 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let post = self.viewModel.postList[section]
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPost") as! PostHeaderView
-        header.post = post
-        header.didReload = DidAction(handler: { (sender) in
-            self.viewModel.replyList(post: post) { (replyList) in
-                self.reloadDirect()
-            }
-        })
         
-        //header.setCollapsed(post.collapsed)
-        //header.section = section
-        //header.delegate = self
-        return header
+        if section == 0 {
+            let pin = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPostPin") as! PostPinHeaderView
+            pin.post = post
+            pin.replyAuthor = post.author
+            pin.didReload = DidAction(handler: { (sender) in
+                self.viewModel.replyList(post: post) { (replyList) in
+                    self.reloadDirect()
+                }
+            })
+            return pin
+        } else {
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPost") as! PostHeaderView
+            header.post = post
+            header.didReload = DidAction(handler: { (sender) in
+                self.viewModel.replyList(post: post) { (replyList) in
+                    self.reloadDirect()
+                }
+            })
+            
+            //header.setCollapsed(post.collapsed)
+            //header.section = section
+            //header.delegate = self
+            return header
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

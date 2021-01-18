@@ -13,7 +13,7 @@
       "is_edited": false,
       "is_deletable": true,
       "is_editable": true,
-      "is_pinned": false,
+      "is_pinned": true,
       "is_liked": false,
       "count_likes": 99,
       "count_replies": 4,
