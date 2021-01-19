@@ -37,16 +37,14 @@ class PostHeaderView: UITableViewHeaderFooterView {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
                 
-                if post.isPinned {// hide when pin
-                    self.seeMoreReplyButton.isHidden = true
-                } else {
-                    self.isReplyAll = post.isReplyFull()
-                    if post.countReplies > maxReplyList {
-                        if self.isReplyAll  {
-                            self.seeMoreReplyButton.isHidden = true
-                        } else {
-                            self.seeMoreReplyButton.isHidden = false
-                        }
+                self.updateUIColor(isPin: post.isPinned)
+                
+                self.isReplyAll = post.isReplyFull()
+                if post.countReplies > maxReplyList {
+                    if self.isReplyAll  {
+                        self.seeMoreReplyButton.isHidden = true
+                    } else {
+                        self.seeMoreReplyButton.isHidden = false
                     }
                 }
             }
@@ -64,6 +62,18 @@ class PostHeaderView: UITableViewHeaderFooterView {
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(_:))))
+        
+        self.updateUIColor(isPin: false)
+    }
+    
+    func updateUIColor(isPin:Bool) {
+        self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
+        self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        
+        self.dateLabel.textColor = .secondary_25()
+        self.linkLabel.textColor = isPin ? .primary() : .secondary_50()
+        self.replyLabel.textColor = isPin ? .primary() : .secondary_50()
     }
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {

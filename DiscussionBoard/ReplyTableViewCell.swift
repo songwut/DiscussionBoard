@@ -36,6 +36,7 @@ class ReplyTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
