@@ -33,7 +33,7 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-ex-PEy">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-ex-PEy" customClass="DiscussionMenuButton" customModule="DiscussionBoard" customModuleProvider="target">
                                                 <rect key="frame" x="216" y="31" width="182" height="43"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="43" id="TT1-Uf-7or"/>
@@ -56,7 +56,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_v2_chevron_down" translatesAutoresizingMaskIntoConstraints="NO" id="k7a-Ne-Acx">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_v2_chevron-down" translatesAutoresizingMaskIntoConstraints="NO" id="k7a-Ne-Acx">
                                                 <rect key="frame" x="370" y="38.5" width="28" height="28"/>
                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -249,23 +249,70 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c57-aa-qNC">
+                                <rect key="frame" x="216" y="168" width="182" height="100"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nvw-3J-6yt">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sB9-Ql-Rpg" customClass="DiscussionMenuButton" customModule="DiscussionBoard" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="TNM-HK-TdA"/>
+                                                    <constraint firstAttribute="width" constant="182" id="pgd-NG-pxz"/>
+                                                </constraints>
+                                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Lastest Discussion">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2D-Gh-1mL" customClass="DiscussionMenuButton" customModule="DiscussionBoard" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="54" width="182" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="Pk6-vK-H5e"/>
+                                                    <constraint firstAttribute="width" constant="182" id="ZbT-Ey-N67"/>
+                                                </constraints>
+                                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Top Discussion">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Nvw-3J-6yt" secondAttribute="trailing" id="Lbl-t6-vFh"/>
+                                    <constraint firstItem="Nvw-3J-6yt" firstAttribute="leading" secondItem="c57-aa-qNC" secondAttribute="leading" id="Mog-8d-59Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nvw-3J-6yt" secondAttribute="bottom" id="Nv6-AC-6Wf"/>
+                                    <constraint firstItem="Nvw-3J-6yt" firstAttribute="top" secondItem="c57-aa-qNC" secondAttribute="top" id="bje-es-REp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="86s-um-uEP"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="c57-aa-qNC" firstAttribute="trailing" secondItem="T5d-ex-PEy" secondAttribute="trailing" id="2WA-hh-JAF"/>
+                            <constraint firstItem="c57-aa-qNC" firstAttribute="leading" secondItem="T5d-ex-PEy" secondAttribute="leading" id="7bC-zI-ZP1"/>
                             <constraint firstItem="Ppw-kx-FpX" firstAttribute="leading" secondItem="86s-um-uEP" secondAttribute="leading" id="Cfo-aN-hLG"/>
                             <constraint firstItem="Ppw-kx-FpX" firstAttribute="trailing" secondItem="86s-um-uEP" secondAttribute="trailing" id="dOK-Gi-FG8"/>
                             <constraint firstItem="86s-um-uEP" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ppw-kx-FpX" secondAttribute="bottom" id="l1u-Aq-Qcc"/>
+                            <constraint firstItem="c57-aa-qNC" firstAttribute="top" secondItem="86s-um-uEP" secondAttribute="top" constant="80" id="q2P-df-d6O"/>
                             <constraint firstItem="Ppw-kx-FpX" firstAttribute="top" secondItem="86s-um-uEP" secondAttribute="top" id="vtS-2s-mLU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rOJ-9d-sWg"/>
                     <connections>
                         <outlet property="boldButton" destination="oRO-uJ-EhC" id="zRX-PV-1YK"/>
+                        <outlet property="currentButton" destination="T5d-ex-PEy" id="NHS-ee-N1K"/>
                         <outlet property="editorToolStackView" destination="G6l-19-Qfs" id="zEq-4R-DPG"/>
                         <outlet property="editorToolView" destination="Ue8-Oc-y1Q" id="oBy-wn-3kb"/>
                         <outlet property="editorView" destination="ol3-0i-vAz" id="etL-ES-FiR"/>
                         <outlet property="italicButton" destination="b87-rA-2aZ" id="xFm-ub-tjO"/>
+                        <outlet property="latestButton" destination="sB9-Ql-Rpg" id="Kab-n5-ICl"/>
+                        <outlet property="selectFilterView" destination="c57-aa-qNC" id="5rj-vg-VJs"/>
+                        <outlet property="titleLabel" destination="PcK-sc-xUw" id="6qH-Vh-2cN"/>
+                        <outlet property="topButton" destination="C2D-Gh-1mL" id="qHj-aO-xA2"/>
                         <outlet property="uiStackView" destination="Ppw-kx-FpX" id="zah-QX-Aci"/>
                         <outlet property="underlineButton" destination="ofA-VO-LMg" id="8cq-lW-dFE"/>
                     </connections>
@@ -342,7 +389,7 @@
         <image name="ic-editor-bold" width="12" height="12"/>
         <image name="ic-editor-italic" width="12" height="12"/>
         <image name="ic-editor-underline" width="9" height="12"/>
-        <image name="ic_v2_chevron_down" width="24" height="24"/>
+        <image name="ic_v2_chevron-down" width="20" height="20"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

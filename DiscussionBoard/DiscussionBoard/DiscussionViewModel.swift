@@ -28,6 +28,7 @@ class DiscussionViewModel {
                 self.postList = postPage.list
                 
                 self.pinIndex = self.getPinIndex()
+                complete()
             }
         }
     }
@@ -54,6 +55,13 @@ class DiscussionViewModel {
                 complete(post)
             }
             
+        }
+    }
+    
+    func reply(html:String, post:DiscussionPostResult, complete: ( _ reply: DiscussionReplyResult) -> ()) {
+        if let reply = DiscussionReplyResult.with(["body" : html]) {
+            post.replyList.append(reply)
+            complete(reply)
         }
     }
     

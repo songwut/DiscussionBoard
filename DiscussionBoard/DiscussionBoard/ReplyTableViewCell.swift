@@ -9,6 +9,8 @@ import UIKit
 
 class ReplyTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var borderView: UIView!
+    
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
@@ -20,6 +22,8 @@ class ReplyTableViewCell: UITableViewCell {
     
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     
+    var isPostPin = false
+    
     var reply: DiscussionReplyResult? {
         didSet {
             if let reply = self.reply {
@@ -30,13 +34,24 @@ class ReplyTableViewCell: UITableViewCell {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = reply.body.html2Atb(font: font)
                 
+                self.linkLabel.textColor = reply.isLiked ? .primary() : .secondary_50()
+                self.linkLabel.text = reply.countLikes.textNumber(many: "like_unit")
             }
+            self.borderView.updateLayout()
+            let pinColorBg: UIColor =  self.isPostPin ? .primary_10() : .clear
+            let pinBorder: UIColor = self.isPostPin ? .primary() : .clear
+            self.borderView.isHidden = !self.isPostPin
+            self.borderView.backgroundColor = pinColorBg
+            self.borderView.layer.addBorder(edge: .left, color: pinBorder, thickness: 1.0)
+            self.borderView.layer.addBorder(edge: .right, color: pinBorder, thickness: 1.0)
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.borderView.isHidden = true
+        
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
@@ -49,9 +64,10 @@ class ReplyTableViewCell: UITableViewCell {
         self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         
-        self.dateLabel.textColor = .secondary_25()
-        self.linkLabel.textColor = .secondary_50()
-        self.replyLabel.textColor = .secondary_50()
+        self.dateLabel.textColor = .secondary()
+        self.linkLabel.textColor = .secondary()
+        self.replyLabel.textColor = .secondary()
+        self.linkButton.tintColor = .secondary()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

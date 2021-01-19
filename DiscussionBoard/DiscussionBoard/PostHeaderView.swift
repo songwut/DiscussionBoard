@@ -37,26 +37,31 @@ class PostHeaderView: UITableViewHeaderFooterView {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
                 
-                if post.isLiked {
-                    
-                }
                 self.linkLabel.textColor = post.isLiked ? .primary() : .secondary_50()
                 self.linkLabel.text = post.countLikes.textNumber(many: "like_unit")
                 
                 self.updateUIColor(isPin: post.isPinned)
                 
                 self.isReplyAll = post.isReplyFull()
-                if post.countReplies > maxReplyList {
-                    if self.isReplyAll  {
-                        self.seeMoreReplyButton.isHidden = true
-                    } else {
-                        self.seeMoreReplyButton.isHidden = false
-                        var seeMoreText = "see previous replies" + "(\(post.countReplies)"
-                        self.seeMoreReplyButton.setTitle(seeMoreText, for: .normal)
-                    }
+                
+                
+            }
+        }
+    }
+    
+    func updateReplyUI() {
+        if let post = self.post {
+            if post.countReplies > maxReplyList {
+                if self.isReplyAll  {
+                    self.seeMoreReplyButton.isHidden = true
+                } else {
+                    self.seeMoreReplyButton.isHidden = false
+                    let seeMoreText = "see previous replies" + "(\(post.countReplies))"
+                    self.seeMoreReplyButton.setTitle(seeMoreText, for: .normal)
                 }
             }
         }
+        
     }
     
     class func instanciateFromNib() -> PostHeaderView {
@@ -83,9 +88,10 @@ class PostHeaderView: UITableViewHeaderFooterView {
         self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         
-        self.dateLabel.textColor = .secondary_25()
-        self.linkLabel.textColor = isPin ? .primary() : .secondary_50()
-        self.replyLabel.textColor = isPin ? .primary() : .secondary_50()
+        self.dateLabel.textColor = .secondary()
+        self.linkLabel.textColor = isPin ? .primary() : .secondary()
+        self.replyLabel.textColor = isPin ? .primary() : .secondary()
+        self.linkButton.tintColor = isPin ? .primary() : .secondary()
     }
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {

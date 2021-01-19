@@ -7,8 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-import RxDataSources
 
 class DiscussionViewController: UIViewController {
     
@@ -20,9 +18,12 @@ class DiscussionViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = DiscussionViewModel()
     
+    var isSaveOfset = true
+    var tableViewOfset:CGPoint = .zero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
         self.tableView.register(UINib(nibName: "PostPinHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellPostPin")
         self.tableView.register(UINib(nibName: "PostHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellPost")
         self.tableView.register(UINib(nibName: "PostFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "cellFooterReply")
@@ -48,22 +49,30 @@ class DiscussionViewController: UIViewController {
             }
         })
         self.tableView?.tableHeaderView = self.postView
+        
+        self.reloadUI()
+    }
+    
+    func reloadUI() {
         self.viewModel.prepareData {
+            self.postVC.updateUI()
             self.tableView.reloadData()
         }
     }
     
     func reloadDirect() {
+        self.isSaveOfset = false
         UIView.performWithoutAnimation {
-            let loc = self.tableView.contentOffset
             tableView.reloadData()
-            tableView.contentOffset = loc
+            tableView.contentOffset = self.tableViewOfset
+            self.isSaveOfset = false
         }
     }
     
     func createPostView() -> UIView {
         self.postVC = (UIStoryboard(name: "Discussion", bundle: nil).instantiateViewController(withIdentifier: "DiscussionPostViewController") as! DiscussionPostViewController)
         self.addChild(self.postVC)
+        self.postVC.viewModel = self.viewModel
         self.postVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
         self.postVC.didMove(toParent: self)
         DispatchQueue.main.async {
@@ -82,7 +91,13 @@ class DiscussionViewController: UIViewController {
         self.tableView.register(UINib(nibName: "ReplyTableViewCell", bundle: nil), forCellReuseIdentifier: "cellReply")
         
     }
-
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.isSaveOfset {
+            self.tableViewOfset = self.tableView.contentOffset
+            print("scrollViewY :\(scrollView.contentOffset.y)")
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -106,7 +121,12 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReply") as! ReplyTableViewCell
+        let post = self.viewModel.postList[indexPath.section]
+        
+        //TODO: show pin
+        //cell.isPostPin = post.isPinned && indexPath.section == 0
         cell.reply = self.viewModel.postList[indexPath.section].replyList[indexPath.row]
+        
         return cell
     }
     
@@ -123,6 +143,14 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
             let pin = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPostPin") as! PostPinHeaderView
             pin.post = post
             pin.replyAuthor = post.author
+            //TODO: show pin
+            //pin.updateReplyUI()
+            pin.didReply = DidAction(handler: { (sender) in
+                guard let html = sender as? String else { return }
+                self.viewModel.reply(html: html, post: post) { (reply) in
+                    self.reloadDirect()
+                }
+            })
             pin.didReload = DidAction(handler: { (sender) in
                 self.viewModel.replyList(post: post) { (replyList) in
                     self.reloadDirect()
@@ -132,12 +160,12 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPost") as! PostHeaderView
             header.post = post
+            header.updateReplyUI()
             header.didReload = DidAction(handler: { (sender) in
                 self.viewModel.replyList(post: post) { (replyList) in
                     self.reloadDirect()
                 }
             })
-            
             //header.setCollapsed(post.collapsed)
             //header.section = section
             //header.delegate = self
@@ -154,10 +182,38 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
             let post = self.viewModel.postList[section]
             let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellFooterReply") as! PostFooterView
             footer.replyAuthor = post.author
+            footer.didReply = DidAction(handler: { (sender) in
+                guard let html = sender as? String else { return }
+                self.viewModel.reply(html: html, post: post) { (reply) in
+                    self.reloadDirect()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {//start
+                        let row = post.replyList.count - 1
+                        tableView.scrollToRow(at: IndexPath(row: row, section: section), at: .middle, animated: false)
+                    }
+                }
+            })
+            footer.didUpdateLayout = DidAction(handler: { (sender) in
+                self.reloadDirect()
+            })
             //header.post = post
             return footer
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboardView))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboardView() {
+        view.endEditing(true)
+    }
 }
 

@@ -15,6 +15,9 @@ class PostFooterView: UITableViewHeaderFooterView {
     @IBOutlet weak var replyAuthorImageView: UIImageView!
     @IBOutlet var editorView: RichEditorView!
     
+    var didReply: DidAction?
+    var didUpdateLayout: DidAction?
+    
     class func instanciateFromNib() -> PostFooterView {
         return Bundle.main.loadNibNamed("PostFooterView", owner: nil, options: nil)![0] as! PostFooterView
     }
@@ -30,9 +33,27 @@ class PostFooterView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.replyView.isHidden = true
+        self.editorView.delegate = self
         self.replyView.isHidden = true
         self.replyAuthorImageView.setCircle()
+        
+        self.replyButton.addTarget(self, action: #selector(self.replyButtonPressed(_:)), for: .touchUpInside)
     }
+    
+    @objc func replyButtonPressed(_ sender: UIButton) {
+        self.didReply?.handler(self.editorView.html)
+        self.editorView.html = ""
+    }
+}
 
+extension PostFooterView: RichEditorDelegate {
+    func richEditorTookFocus(_ editor: RichEditorView) {
+        self.replyView.isHidden = false
+        self.didUpdateLayout?.handler(self)
+    }
+    
+    func richEditorLostFocus(_ editor: RichEditorView) {
+        self.replyView.isHidden = true
+        self.didUpdateLayout?.handler(self)
+    }
 }

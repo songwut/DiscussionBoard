@@ -8,7 +8,6 @@
 
 import Foundation
 import ObjectMapper
-import RxDataSources
 
 class DiscussionBoardPageResult: PageResult {
     

@@ -8,8 +8,26 @@
 import UIKit
 import RichEditorView
 
-class DiscussionPostViewController: UIViewController {
+enum DiscussionMenuType: String {
+    case latest = "latest_discussion"
+    case top = "top_discussion"
+}
 
+class DiscussionMenuButton: UIButton {
+    var type:DiscussionMenuType = DiscussionMenuType.latest
+}
+
+class DiscussionPostViewController: UIViewController {
+    
+    var viewModel: DiscussionViewModel?
+
+    @IBOutlet var titleLabel: UILabel!
+    
+    @IBOutlet var selectFilterView: UIView!
+    @IBOutlet var currentButton: DiscussionMenuButton!
+    @IBOutlet var latestButton: DiscussionMenuButton!
+    @IBOutlet var topButton: DiscussionMenuButton!
+    
     @IBOutlet var uiStackView: UIStackView!
     @IBOutlet var editorView: RichEditorView!
     @IBOutlet var editorToolStackView: UIStackView!
@@ -22,6 +40,9 @@ class DiscussionPostViewController: UIViewController {
     var htmlContent: String?
     var didLoaded: DidAction?
     var didPost: DidAction?
+    var didMenuSelected: DidAction?
+    
+    var menuList = [DiscussionMenuButton]()
     
     lazy var editorToolbar: RichEditorToolbar = {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
@@ -33,6 +54,7 @@ class DiscussionPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.uiStackView.updateLayout()
+        
         self.editorToolView.layer.borderWidth = 1
         self.editorToolView.layer.borderColor = grayColor.cgColor
         self.editorToolView.layer.cornerRadius = 4
@@ -59,7 +81,9 @@ class DiscussionPostViewController: UIViewController {
         //connect editorView to tool bar
         self.editorToolbar.delegate = self
         self.editorToolbar.editor = self.editorView
-
+        
+        self.manageMenuButton()
+        
         // custom action that clears all the input text when it is pressed
         /*
         let clear = RichEditorOptionItem(image: nil, title: "Clear") { toolbar in
@@ -67,6 +91,50 @@ class DiscussionPostViewController: UIViewController {
         }
         */
         self.didLoaded?.handler(self)
+    }
+    
+    func manageMenuButton() {
+        self.latestButton.type = .latest
+        self.topButton.type = .top
+        self.menuList = [self.latestButton, self.topButton]
+        
+        self.currentButton.type = self.latestButton.type
+        self.currentButton.setTitle(self.latestButton.type.rawValue.localized(), for: .normal)
+        self.currentButton.addTarget(self, action: #selector(self.currentButtonPressed(_:)), for: .touchUpInside)
+        
+        for btn in self.menuList {
+            btn.isHidden = true
+            btn.cornerRadius = 4.0
+            btn.borderWidth = 1.0
+            btn.borderColor = UIColor(hex: "D7D8D9")
+            btn.setTitle(btn.type.rawValue.localized(), for: .normal)
+            btn.addTarget(self, action: #selector(self.menuButtonPressed(_:)), for: .touchUpInside)
+            btn.setShadow(radius: 5.0, opacity: 0.2, color: .black, offset: CGSize.zero)
+        }
+    }
+    
+    @objc func menuButtonPressed(_ button: DiscussionMenuButton) {
+        self.selectFilterView.isHidden = true
+        self.currentButton.type = button.type
+        self.currentButton.setTitle(button.type.rawValue.localized(), for: .normal)
+        self.didMenuSelected?.handler(button.type)
+    }
+    
+    @objc func currentButtonPressed(_ button: DiscussionMenuButton) {
+        for btn in self.menuList {//hide same type
+            btn.isHidden = btn.type == button.type
+        }
+        self.selectFilterView.isHidden = !self.selectFilterView.isHidden
+    }
+    
+    func updateUI() {
+        if let postList = self.viewModel?.postList {
+            var text = "discussion".localized()
+            if postList.count >= 1 {
+                text = text + " " + "(\(postList.count))"
+            }
+            self.titleLabel.text = text
+        }
     }
     
     func updateSelected(_ sender: UIButton) {
