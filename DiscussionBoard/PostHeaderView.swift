@@ -37,6 +37,12 @@ class PostHeaderView: UITableViewHeaderFooterView {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
                 
+                if post.isLiked {
+                    
+                }
+                self.linkLabel.textColor = post.isLiked ? .primary() : .secondary_50()
+                self.linkLabel.text = post.countLikes.textNumber(many: "like_unit")
+                
                 self.updateUIColor(isPin: post.isPinned)
                 
                 self.isReplyAll = post.isReplyFull()
@@ -45,6 +51,8 @@ class PostHeaderView: UITableViewHeaderFooterView {
                         self.seeMoreReplyButton.isHidden = true
                     } else {
                         self.seeMoreReplyButton.isHidden = false
+                        var seeMoreText = "see previous replies" + "(\(post.countReplies)"
+                        self.seeMoreReplyButton.setTitle(seeMoreText, for: .normal)
                     }
                 }
             }
@@ -64,6 +72,10 @@ class PostHeaderView: UITableViewHeaderFooterView {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(_:))))
         
         self.updateUIColor(isPin: false)
+        
+        self.seeMoreReplyButton.imageView?.tintColor = .secondary()
+        self.seeMoreReplyButton.tintColor = .secondary()
+        self.seeMoreReplyButton.titleLabel?.font = FontHelper.getFontSystem(.small , font: .text)
     }
     
     func updateUIColor(isPin:Bool) {

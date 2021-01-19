@@ -26,14 +26,34 @@ class DiscussionViewModel {
                let postPage = DiscussionBoardPageResult(JSON: jsonResult) {
                 print("jsonResult: \(jsonResult)")
                 self.postList = postPage.list
+                
+                self.pinIndex = self.getPinIndex()
             }
         }
+    }
+    var pinIndex: Int?
+    func getPinIndex() -> Int? {
+        let index = self.postList.firstIndex { (item) -> Bool in
+            return item.isPinned == true
+        }
+        return index
     }
     
     func post(html:String, complete: ( _ post: DiscussionPostResult) -> ()) {
         if let post = DiscussionPostResult.with(["body" : html]) {
-            self.postList.insert(post, at: 0)
-            complete(post)
+            if let index = self.pinIndex {
+                let i = index + 1
+                if i == self.postList.count {
+                    self.postList.append(post)
+                } else {
+                    self.postList.insert(post, at: i)
+                }
+                complete(post)
+            } else {//no pin add in first object
+                self.postList.insert(post, at: 0)
+                complete(post)
+            }
+            
         }
     }
     

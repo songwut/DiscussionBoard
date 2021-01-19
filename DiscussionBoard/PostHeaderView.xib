@@ -79,7 +79,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Do3-3e-xUU">
-                                                                    <rect key="frame" x="0.0" y="8" width="223.5" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="8" width="253.5" height="24"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Jan 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-7W-Pfp">
                                                                             <rect key="frame" x="0.0" y="3.5" width="80" height="17"/>
@@ -91,7 +91,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYS-Qe-hs7">
-                                                                            <rect key="frame" x="80" y="0.0" width="108" height="24"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="138" height="24"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKs-bG-Qlr">
                                                                                     <rect key="frame" x="16" y="0.0" width="24" height="24"/>
@@ -103,11 +103,8 @@
                                                                                         <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     </state>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTF-Nc-KJW">
-                                                                                    <rect key="frame" x="48" y="0.0" width="60" height="24"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="60" id="f78-QX-p5F"/>
-                                                                                    </constraints>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTF-Nc-KJW">
+                                                                                    <rect key="frame" x="48" y="0.0" width="90" height="24"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
@@ -125,7 +122,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reply" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVx-k7-MyL">
-                                                                            <rect key="frame" x="188" y="3.5" width="35.5" height="17"/>
+                                                                            <rect key="frame" x="218" y="3.5" width="35.5" height="17"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>

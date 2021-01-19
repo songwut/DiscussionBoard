@@ -40,6 +40,18 @@ class ReplyTableViewCell: UITableViewCell {
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
+        
+        self.updateUIColor()
+    }
+    
+    func updateUIColor() {
+        self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
+        self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        
+        self.dateLabel.textColor = .secondary_25()
+        self.linkLabel.textColor = .secondary_50()
+        self.replyLabel.textColor = .secondary_50()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

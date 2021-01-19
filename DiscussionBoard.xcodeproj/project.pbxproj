@@ -63,6 +63,12 @@
 		69235A6825B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
 		69235A6925B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
 		69235A6A25B34C9600F1880A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69235A6725B34C9600F1880A /* Color.swift */; };
+		6950061D25B6D1CC00AB7C9C /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950061C25B6D1CB00AB7C9C /* Int.swift */; };
+		6950061E25B6D1CC00AB7C9C /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950061C25B6D1CB00AB7C9C /* Int.swift */; };
+		6950061F25B6D1CC00AB7C9C /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950061C25B6D1CB00AB7C9C /* Int.swift */; };
+		6950062425B6D26A00AB7C9C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950062325B6D26A00AB7C9C /* String.swift */; };
+		6950062525B6D26A00AB7C9C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950062325B6D26A00AB7C9C /* String.swift */; };
+		6950062625B6D26A00AB7C9C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6950062325B6D26A00AB7C9C /* String.swift */; };
 		696F11BE25B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
 		696F11BF25B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
 		696F11C025B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
@@ -134,6 +140,8 @@
 		69235A3625B338C800F1880A /* IBMPlexSansThai-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansThai-Medium.ttf"; sourceTree = "<group>"; };
 		69235A4625B33AB700F1880A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		69235A6725B34C9600F1880A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6950061C25B6D1CB00AB7C9C /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		6950062325B6D26A00AB7C9C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPinHeaderView.swift; sourceTree = "<group>"; };
 		696F11C425B5F5650006E76E /* PostPinHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPinHeaderView.xib; sourceTree = "<group>"; };
 		69D6818825B466830017F986 /* reply_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reply_list.json; sourceTree = "<group>"; };
@@ -255,6 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				692359AC25B1A69400F1880A /* Extension.swift */,
+				6950061C25B6D1CB00AB7C9C /* Int.swift */,
+				6950062325B6D26A00AB7C9C /* String.swift */,
 				69235A6725B34C9600F1880A /* Color.swift */,
 				69235A4625B33AB700F1880A /* UIImageView.swift */,
 			);
@@ -480,6 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6950062425B6D26A00AB7C9C /* String.swift in Sources */,
 				6923596E25B177A800F1880A /* ViewController.swift in Sources */,
 				69235A1A25B3162E00F1880A /* JSON.swift in Sources */,
 				696F11BE25B5F5590006E76E /* PostPinHeaderView.swift in Sources */,
@@ -495,6 +506,7 @@
 				6923596C25B177A800F1880A /* SceneDelegate.swift in Sources */,
 				692359AD25B1A69400F1880A /* Extension.swift in Sources */,
 				692359E125B1F74D00F1880A /* PostHeaderView.swift in Sources */,
+				6950061D25B6D1CC00AB7C9C /* Int.swift in Sources */,
 				692359BE25B1C27E00F1880A /* DiscussionPostViewController.swift in Sources */,
 				69D6819325B499560017F986 /* PostFooterView.swift in Sources */,
 			);
@@ -505,8 +517,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				696F11BF25B5F5590006E76E /* PostPinHeaderView.swift in Sources */,
+				6950062525B6D26A00AB7C9C /* String.swift in Sources */,
 				69235A4825B33AB700F1880A /* UIImageView.swift in Sources */,
 				69235A0A25B201F000F1880A /* Results.swift in Sources */,
+				6950061E25B6D1CC00AB7C9C /* Int.swift in Sources */,
 				69235A1B25B3162E00F1880A /* JSON.swift in Sources */,
 				69D6819425B499560017F986 /* PostFooterView.swift in Sources */,
 				69235A0325B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,
@@ -523,8 +537,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				696F11C025B5F5590006E76E /* PostPinHeaderView.swift in Sources */,
+				6950062625B6D26A00AB7C9C /* String.swift in Sources */,
 				69235A4925B33AB700F1880A /* UIImageView.swift in Sources */,
 				69235A0B25B201F000F1880A /* Results.swift in Sources */,
+				6950061F25B6D1CC00AB7C9C /* Int.swift in Sources */,
 				69235A1C25B3162E00F1880A /* JSON.swift in Sources */,
 				69D6819525B499560017F986 /* PostFooterView.swift in Sources */,
 				69235A0425B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,

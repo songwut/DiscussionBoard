@@ -147,11 +147,16 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let post = self.viewModel.postList[section]
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellFooterReply") as! PostFooterView
-        footer.replyAuthor = post.author
-        //header.post = post
-        return footer
+        if self.viewModel.pinIndex == section {
+            //ignore create reply footer
+            return nil
+        } else {
+            let post = self.viewModel.postList[section]
+            let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellFooterReply") as! PostFooterView
+            footer.replyAuthor = post.author
+            //header.post = post
+            return footer
+        }
     }
     
 }
