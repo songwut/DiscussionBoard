@@ -190,8 +190,8 @@
             filePath = "DiscussionBoard/DiscussionBoard/DiscussionListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>

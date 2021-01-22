@@ -23,6 +23,20 @@ class DiscussionBoardPageResult: PageResult {
     }
 }
 
+class DiscussionReactionResult: BaseResult {
+    
+    var countLikes: Int?
+    
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        countLikes             <- map["count_likes"]
+    }
+}
+
 class DiscussionReplyListResult: BaseResult {
     
     var list = [DiscussionReplyResult]()

@@ -14,7 +14,6 @@ class DCPinView: DCBasePostView {
         return Bundle.main.loadNibNamed("DCPinView", owner: nil, options: nil)![0] as! DCPinView
     }
     
-    @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var pinImageView: UIImageView!
     @IBOutlet weak var replyAuthorImageView: UIImageView!
     
@@ -34,9 +33,6 @@ class DCPinView: DCBasePostView {
                 self.replyAuthorImageView.setImage(replyAuthor.image, placeholderImage: nil)
                 
             }
-            //self.borderView.updateLayout()
-            //self.borderView.backgroundColor = .primary_10()
-            //self.borderView.layer.addBorder(edge: .top, color: .primary(), thickness: 1.0)
         }
     }
     

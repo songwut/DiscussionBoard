@@ -59,7 +59,7 @@ class ReplyTableViewCell: UITableViewCell {
         self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
         self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
-        let gray = UIColor(hex: "EFEFF0")
+        let gray = UIColor(hex: "8F9295")
         self.dateLabel.textColor = gray
         self.linkLabel.textColor = gray
         self.replyLabel.textColor = gray

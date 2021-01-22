@@ -37,6 +37,7 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var latestButton: DiscussionMenuButton!
     @IBOutlet var topButton: DiscussionMenuButton!
     
+    @IBOutlet var editorBorderView: UIView!
     @IBOutlet var uiStackView: UIStackView!
     @IBOutlet var editorView: RichEditorView!
     @IBOutlet var editorToolStackView: UIStackView!
@@ -46,6 +47,8 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var boldButton: UIButton!
     @IBOutlet var italicButton: UIButton!
     @IBOutlet var underlineButton: UIButton!
+    @IBOutlet var bulletButton: UIButton!
+    @IBOutlet var numberButton: UIButton!
     
     var htmlContent: String?
     var didLoaded: DidAction?
@@ -53,6 +56,7 @@ class DiscussionPostViewController: UIViewController {
     var didMenuSelected: DidAction?
     
     var menuList = [DiscussionMenuButton]()
+    let gray = UIColor(hex: "8F9295")
     
     lazy var editorToolbar: RichEditorToolbar = {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
@@ -68,7 +72,7 @@ class DiscussionPostViewController: UIViewController {
         self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
         
         self.editorToolView.layer.borderWidth = 1
-        self.editorToolView.layer.borderColor = grayColor.cgColor
+        self.editorToolView.layer.borderColor = self.gray.cgColor
         self.editorToolView.layer.cornerRadius = 4
         self.editorToolView.clipsToBounds = true
         self.editorView.delegate = self
@@ -76,9 +80,13 @@ class DiscussionPostViewController: UIViewController {
         self.boldButton.imageView?.tintColor = .black
         self.italicButton.imageView?.tintColor = .black
         self.underlineButton.imageView?.tintColor = .black
+        self.bulletButton.imageView?.tintColor = .black
+        self.numberButton.imageView?.tintColor = .black
         self.boldButton.addTarget(self, action: #selector(self.boldPressed(_:)), for: .touchUpInside)
         self.italicButton.addTarget(self, action: #selector(self.italicPressed(_:)), for: .touchUpInside)
         self.underlineButton.addTarget(self, action: #selector(self.underlinePressed(_:)), for: .touchUpInside)
+        self.bulletButton.addTarget(self, action: #selector(self.bulletPressed(_:)), for: .touchUpInside)
+        self.numberButton.addTarget(self, action: #selector(self.numberPressed(_:)), for: .touchUpInside)
         //add editor tool to top keyboard
         //editorView.inputAccessoryView = editorToolbar
         
@@ -157,7 +165,7 @@ class DiscussionPostViewController: UIViewController {
             
         } else {
             sender.isSelected = true
-            sender.backgroundColor = grayColor
+            sender.backgroundColor = self.gray
             sender.imageView?.tintColor = .black
         }
     }
@@ -177,6 +185,18 @@ class DiscussionPostViewController: UIViewController {
     @objc
     func underlinePressed(_ sender: UIButton) {
         self.editorToolbar.editor?.underline()
+        self.updateSelected(sender)
+    }
+    
+    @objc
+    func bulletPressed(_ sender: UIButton) {
+        self.editorToolbar.editor?.unorderedList()
+        self.updateSelected(sender)
+    }
+    
+    @objc
+    func numberPressed(_ sender: UIButton) {
+        self.editorToolbar.editor?.orderedList()
         self.updateSelected(sender)
     }
     
@@ -207,9 +227,11 @@ extension DiscussionPostViewController: RichEditorDelegate {
         if content.isEmpty || self.editorView.html == "<br>" {
             self.htmlContent = nil
             self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
+            self.editorBorderView.borderColor = UIColor(hex: "D7D8D9")
         } else {
             self.postButton.setStyleColor(true, titleColor: .white, bgColor: .primary())
             self.htmlContent = content
+            self.editorBorderView.borderColor = .primary()
         }
     }
     

@@ -77,4 +77,23 @@ class DiscussionViewModel {
             }
         }
     }
+    
+    func reaction(item:Any?, complete:@escaping ( _ reaction: DiscussionReactionResult?,  _ isLiked: Bool) -> ()) {
+        var reaction:DiscussionReactionResult?
+        var isLiked = false
+        if let post = item as? DiscussionPostResult {
+            isLiked = !post.isLiked
+            let count = isLiked ? (post.countLikes + 1) : (post.countLikes - 1)
+            post.isLiked = isLiked
+            post.countLikes = count
+            reaction = DiscussionReactionResult(JSON: ["count_likes" : count])
+        } else if let reply = item as? DiscussionReplyResult {
+            isLiked = !reply.isLiked
+            let count = isLiked ? (reply.countLikes + 1) : (reply.countLikes - 1)
+            reply.isLiked = isLiked
+            reply.countLikes = count
+            reaction = DiscussionReactionResult(JSON: ["count_likes" : count])
+        }
+        complete(reaction, isLiked)
+    }
 }

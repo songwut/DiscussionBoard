@@ -8,12 +8,13 @@
 import UIKit
 import RichEditorView
 
-class DCReplyView: UIView {
+class DCReplyView: DCReactionView {
     
     class func instanciateFromNib() -> DCReplyView {
         return Bundle.main.loadNibNamed("DCReplyView", owner: nil, options: nil)![0] as! DCReplyView
     }
     
+    @IBOutlet weak var marginLeft: NSLayoutConstraint!
     @IBOutlet weak var editView: UIView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -24,19 +25,14 @@ class DCReplyView: UIView {
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var replyButton: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
-    
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     
     var isPostPin = false
-    var didLikePressed: DidAction?
     
     var reply: DiscussionReplyResult? {
         didSet {
             if let reply = self.reply {
+                self.content = reply
                 if let author = reply.author {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
                     self.authorNameLabel.text = author.name
@@ -45,8 +41,7 @@ class DCReplyView: UIView {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = reply.body.html2Atb(font: font)
                 
-                self.linkLabel.textColor = reply.isLiked ? .primary() : .secondary_50()
-                self.linkLabel.text = reply.countLikes.textNumber(many: "like_unit")
+                self.reaction(reply.isLiked, reply.countLikes)
             }
         }
     }
@@ -61,20 +56,13 @@ class DCReplyView: UIView {
         self.updateUIColor()
     }
     
-    @objc func likeButtonPressed(_ sender: UIButton) {
-        self.didLikePressed?.handler(self.reply)
-    }
-    
-    
     func updateUIColor() {
         self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
-        self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
         self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
-        let gray = UIColor(hex: "EFEFF0")
-        self.dateLabel.textColor = gray
-        self.linkLabel.textColor = gray
-        self.replyButton.setTitleColor(gray, for: .normal)
-        self.likeButton.tintColor = gray
+        self.dateLabel.textColor = self.gray
+        self.replyButton.setTitleColor(self.gray, for: .normal)
+        self.likeButton.tintColor = self.gray
+        self.likeButton.setTitleColor(self.gray, for: .normal)
     }
 
 }

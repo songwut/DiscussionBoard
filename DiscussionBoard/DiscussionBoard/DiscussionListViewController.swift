@@ -7,6 +7,11 @@
 
 import UIKit
 
+class PostObj {
+    var postView: DCPostView?
+    var replyList = [DCReplyView]()
+}
+
 class DiscussionListViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -25,13 +30,13 @@ class DiscussionListViewController: UIViewController {
     var pinVC:DCPinListViewController!
     
     var pinView: DCBasePostView!
-    var postViewList = [Int: UIView]()
+    var postViewList = [Int: PostObj]()
     var isSaveOfset = true
     var tableViewOfset:CGPoint = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.scrollView.backgroundColor = .white
         self.viewmodelCallApi()
     }
     
@@ -70,18 +75,17 @@ class DiscussionListViewController: UIViewController {
             self.pinStackView.isHidden = false
             self.pinStackView.addArrangedSubview(self.pinView)
             
-            
-            //post
+            //pin item
+            self.pinItemStackView.removeAllArrangedSubviews()
             var index = 0
             for reply in self.viewModel.postList[pinIndex].replyList {
                 if index < 2 {
-                    let replyView = DCReplyView.instanciateFromNib()
-                    replyView.reply = reply
+                    let replyView = self.createReply(reply)
+                    replyView.marginLeft.constant = 52
                     self.pinItemStackView.addArrangedSubview(replyView)
                     index += 1
                 }
             }
-            
             
         } else {
             self.pinStackView.isHidden = true
@@ -93,17 +97,51 @@ class DiscussionListViewController: UIViewController {
             let postView = DCPostView.instanciateFromNib()
             postView.post = post
             postView.updateReplyUI(post: post)
+            postView.didLikePressed = DidAction(handler: { (sender) in
+                self.reaction(content: post, reactionView: postView)
+            })
             postView.didReload = DidAction(handler: { (sender) in
                 self.viewModel.replyList(post: post) { (replyList) in
                     //postView
                     //self.reloadDirect()
                 }
             })
-            self.postViewList[post.id] = postView
+            
+            //reply item
+            postView.itemStackView.removeAllArrangedSubviews()
+            var index = 0
+            let postObj = PostObj()
+            postObj.postView = postView
+            for reply in post.replyList {
+                if index < 2 {
+                    let replyView = self.createReply(reply)
+                    postObj.replyList.append(replyView)
+                    postView.itemStackView.addArrangedSubview(replyView)
+                    index += 1
+                }
+            }
+            self.postViewList[post.id] = postObj
             self.postItemStackView.addArrangedSubview(postView)
         }
     }
     
+    func createReply(_ reply:DiscussionReplyResult) -> DCReplyView {
+        let replyView = DCReplyView.instanciateFromNib()
+        replyView.didLikePressed = DidAction(handler: { (sender) in
+            self.reaction(content: reply, reactionView: replyView)
+        })
+        replyView.reply = reply
+        return replyView
+    }
+    
+    func reaction(content:Any, reactionView:DCReactionView) {
+        self.viewModel.reaction(item: content) { (result, isLiked) in
+            if let reaction = result,
+               let countLikes = reaction.countLikes {
+                reactionView.reaction(isLiked, countLikes)
+            }
+        }
+    }
     
     
     func createPostView() {

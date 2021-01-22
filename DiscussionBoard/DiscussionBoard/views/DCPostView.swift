@@ -10,14 +10,74 @@ import RichEditorView
 
 class DCPostView: DCBasePostView {
     
+    @IBOutlet weak var itemStackView: UIStackView!
+    
     class func instanciateFromNib() -> DCPostView {
         return Bundle.main.loadNibNamed("DCPostView", owner: nil, options: nil)![0] as! DCPostView
     }
     
 }
 
+class DCReactionView: UIView {
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
+    
+    let gray = UIColor(hex: "8F9295")
+    var didLikePressed: DidAction?
+    var didreplyPressed: DidAction?
+    var content:Any?
+    
+    func reaction(_ isLiked: Bool, _ countLikes:Int) {
+        let numText = countLikes.shorted()
+        let unit = countLikes.textNumber(many: "like_unit").split(separator: Character(" "))
+        let likeText = numText + " \(unit[1])"
+        
+        if countLikes == 0 {
+            self.likeButton.setTitle("like".localized(), for: .normal)
+        } else {
+            self.likeButton.setTitle(likeText, for: .normal)
+        }
+        
+        if isLiked {
+            self.likeButton.tintColor = .primary()
+            self.likeButton.setTitleColor(.primary(), for: .normal)
+        } else {
+            self.likeButton.tintColor = self.gray
+            self.likeButton.setTitleColor(self.gray, for: .normal)
+        }
+    }
+    
+    func prepareUI() {
+        self.dateLabel.font = .font(.small, .text)
+        self.replyButton.titleFont = .font(.small, .bold)
+        self.likeButton.titleFont = .font(.small, .bold)
+        self.replyButton.addTarget(self, action: #selector(self.replyPressed(_:)), for: .touchUpInside)
+        self.likeButton.addTarget(self, action: #selector(self.replyPressed(_:)), for: .touchUpInside)
+        
+    }
+    
+    func updateUIColor(isPin:Bool) {
+        self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
+        self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
+        
+        self.dateLabel.textColor = self.gray
+        self.replyButton.setTitleColor(self.gray, for: .normal)
+        self.likeButton.tintColor = self.gray
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: UIButton) {
+        self.didLikePressed?.handler(self.content)
+    }
+    
+    @IBAction  func replyPressed(_ sender: UIButton) {
+        self.didreplyPressed?.handler(self.content)
+    }
+}
 
-class DCBasePostView: UIView {
+
+class DCBasePostView: DCReactionView {
     @IBOutlet weak var editView: UIView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -27,11 +87,6 @@ class DCBasePostView: UIView {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var replyButton: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
     
     @IBOutlet weak var seeMoreReplyButton: UIButton!
     
@@ -44,6 +99,7 @@ class DCBasePostView: UIView {
     var post: DiscussionPostResult? {
         didSet {
             if let post = self.post {
+                self.content = post
                 if let author = post.author {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
                     self.authorNameLabel.text = author.name
@@ -52,13 +108,11 @@ class DCBasePostView: UIView {
                 let font = self.textView.font ?? textViewFont
                 self.textView.attributedText = post.body.html2Atb(font: font)
                 
-                self.linkLabel.textColor = post.isLiked ? .primary() : .secondary_50()
-                self.linkLabel.text = post.countLikes.textNumber(many: "like_unit")
-                
                 self.updateUIColor(isPin: post.isPinned)
                 
                 self.isReplyAll = post.isReplyFull()
                 
+                self.reaction(post.isLiked, post.countLikes)
                 
             }
         }
@@ -74,6 +128,7 @@ class DCBasePostView: UIView {
                     let countLeft = post.countReplies - maxReplyList
                     let seeMoreText = "see previous replies" + "(\(countLeft))"
                     self.seeMoreReplyButton.setTitle(seeMoreText, for: .normal)
+                    
                 }
             }
         }
@@ -84,6 +139,7 @@ class DCBasePostView: UIView {
         super.awakeFromNib()
         self.editView.isHidden = true
         self.editorHelper = EditorHelper()
+        self.editorHelper.borderView = self.editView.superview
         self.editorHelper.cancelButton = self.cancelButton
         self.editorHelper.editView = self.editView
         self.editorHelper.editButton = self.editButton
@@ -98,35 +154,18 @@ class DCBasePostView: UIView {
         
         self.updateUIColor(isPin: false)
         
-        self.seeMoreReplyButton.imageView?.tintColor = .secondary()
-        self.seeMoreReplyButton.tintColor = .secondary()
+        self.seeMoreReplyButton.borderColor = UIColor(hex: "AFB1B4")
+        self.seeMoreReplyButton.imageView?.tintColor = UIColor(hex: "8F9295")
+        self.seeMoreReplyButton.tintColor = UIColor(hex: "8F9295")
         self.seeMoreReplyButton.titleLabel?.font = FontHelper.getFontSystem(.small , font: .text)
     }
     
-    func updateUIColor(isPin:Bool) {
-        self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
-        self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
-        self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
-        
-        let color = isPin ? .primary() : UIColor(hex: "EFEFF0")
-        self.dateLabel.textColor = color
-        self.linkLabel.textColor = color
-        self.replyButton.setTitleColor(color, for: .normal)
-        self.likeButton.tintColor = color
-    }
+    
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {
         self.isReplyAll = true
         self.seeMoreReplyButton.isHidden = true
         self.didReload?.handler(self)
-    }
-    
-    @IBAction func replyPressed(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func likePressed(_ sender: UIButton) {
-        
     }
     
     @IBAction func editPressed(_ sender: UIButton) {
