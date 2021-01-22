@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,10 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="572" height="403"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aow-6q-7GS">
-                        <rect key="frame" x="16" y="-8" width="540" height="166.5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Y-6O-0eU">
                         <rect key="frame" x="52" y="-8" width="504" height="166.5"/>
                         <subviews>
@@ -201,11 +196,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Q4Y-6O-0eU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-8" id="4Jd-gn-I3N"/>
-                    <constraint firstItem="aow-6q-7GS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-8" id="Hna-Sv-sIB"/>
-                    <constraint firstItem="aow-6q-7GS" firstAttribute="bottom" secondItem="Q4Y-6O-0eU" secondAttribute="bottom" id="U2i-Bd-XKa"/>
                     <constraint firstAttribute="trailing" secondItem="Q4Y-6O-0eU" secondAttribute="trailing" constant="16" id="UuG-Uc-uE5"/>
-                    <constraint firstAttribute="trailing" secondItem="aow-6q-7GS" secondAttribute="trailing" constant="16" id="YoO-K6-8rh"/>
-                    <constraint firstItem="aow-6q-7GS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ehg-Ob-RF4"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Q4Y-6O-0eU" secondAttribute="bottom" constant="-8" id="i7s-li-div"/>
                     <constraint firstItem="Q4Y-6O-0eU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="52" id="wbw-Kt-XD1"/>
                 </constraints>
@@ -215,9 +206,8 @@
             <connections>
                 <outlet property="authorImageView" destination="umA-9m-hdZ" id="WvS-cK-3y3"/>
                 <outlet property="authorNameLabel" destination="KQn-WW-Cm6" id="OaA-cL-NUy"/>
-                <outlet property="borderView" destination="aow-6q-7GS" id="WHf-d7-KKe"/>
                 <outlet property="dateLabel" destination="N3y-oj-bfy" id="S97-NM-4e3"/>
-                <outlet property="linkButton" destination="fBg-cd-lBN" id="h89-dA-9IY"/>
+                <outlet property="likeButton" destination="fBg-cd-lBN" id="uyX-L6-Eka"/>
                 <outlet property="linkLabel" destination="MQU-Zg-fW4" id="K7R-md-lv7"/>
                 <outlet property="replyLabel" destination="sGp-ur-pxu" id="2Ob-7i-sVb"/>
                 <outlet property="textView" destination="0bt-qh-07G" id="CBD-lF-ziB"/>
@@ -228,8 +218,5 @@
     <resources>
         <image name="ic-tri-reply" width="16" height="12"/>
         <image name="thumbs" width="24" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

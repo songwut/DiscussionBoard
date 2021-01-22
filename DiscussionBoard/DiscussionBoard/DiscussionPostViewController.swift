@@ -11,6 +11,15 @@ import RichEditorView
 enum DiscussionMenuType: String {
     case latest = "latest_discussion"
     case top = "top_discussion"
+    
+    func value() -> String {
+        switch self {
+        case .top:
+            return "count_likes"
+        default:
+            return "datetime_create"
+        }
+    }
 }
 
 class DiscussionMenuButton: UIButton {
@@ -32,6 +41,7 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var editorView: RichEditorView!
     @IBOutlet var editorToolStackView: UIStackView!
     @IBOutlet var editorToolView: UIView!
+    @IBOutlet var postButton: UIButton!
     
     @IBOutlet var boldButton: UIButton!
     @IBOutlet var italicButton: UIButton!
@@ -54,6 +64,8 @@ class DiscussionPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.uiStackView.updateLayout()
+        
+        self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
         
         self.editorToolView.layer.borderWidth = 1
         self.editorToolView.layer.borderColor = grayColor.cgColor
@@ -173,7 +185,16 @@ class DiscussionPostViewController: UIViewController {
             print("textHtml:")
             print(textHtml)
         }
+        self.boldButton.isSelected = false
+        self.italicButton.isSelected = false
+        self.underlineButton.isSelected = false
+        
+        self.updateSelected(self.boldButton)
+        self.updateSelected(self.italicButton)
+        self.updateSelected(self.underlineButton)
+        
         self.view.endEditing(true)
+        self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
         self.didPost?.handler(self.htmlContent)
         self.editorView.html = ""
     }
@@ -183,9 +204,11 @@ class DiscussionPostViewController: UIViewController {
 extension DiscussionPostViewController: RichEditorDelegate {
 
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
-        if content.isEmpty {
+        if content.isEmpty || self.editorView.html == "<br>" {
             self.htmlContent = nil
+            self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
         } else {
+            self.postButton.setStyleColor(true, titleColor: .white, bgColor: .primary())
             self.htmlContent = content
         }
     }

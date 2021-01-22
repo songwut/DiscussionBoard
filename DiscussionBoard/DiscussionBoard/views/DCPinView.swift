@@ -1,23 +1,27 @@
 //
-//  PostPinHeaderView.swift
+//  DCPinView.swift
 //  DiscussionBoard
 //
-//  Created by Songwut Maneefun on 18/1/2564 BE.
+//  Created by Songwut Maneefun on 21/1/2564 BE.
 //
 
 import UIKit
 import RichEditorView
 
-class PostPinHeaderView: PostHeaderView {
-
+class DCPinView: DCBasePostView {
+    
+    class func instanciateFromNib() -> DCPinView {
+        return Bundle.main.loadNibNamed("DCPinView", owner: nil, options: nil)![0] as! DCPinView
+    }
+    
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var pinImageView: UIImageView!
-    @IBOutlet weak var replyView: UIView!
-    @IBOutlet weak var replyButton: UIButton!
-    @IBOutlet weak var editorView: RichEditorView!
     @IBOutlet weak var replyAuthorImageView: UIImageView!
     
-    @IBOutlet weak var editorHeight: NSLayoutConstraint!
+    @IBOutlet weak var replyView: UIView!
+    @IBOutlet weak var replyPostButton: UIButton!
+    @IBOutlet weak var editorReplyView: RichEditorView!
+    @IBOutlet weak var editorReplyHeight: NSLayoutConstraint!
     
     var didReply: DidAction?
     var didUpdateLayout: DidAction?
@@ -46,10 +50,10 @@ class PostPinHeaderView: PostHeaderView {
         self.textView.font = textViewFont
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapHeader(_:))))
         
-        self.replyButton.addTarget(self, action: #selector(self.replyButtonPressed(_:)), for: .touchUpInside)
+        self.replyPostButton.addTarget(self, action: #selector(self.replyPostButtonPressed(_:)), for: .touchUpInside)
     }
     
-    @objc func replyButtonPressed(_ sender: UIButton) {
+    @objc func replyPostButtonPressed(_ sender: UIButton) {
         self.replyView.isHidden = true
         self.didReply?.handler(self.editorView.html)
         self.editorView.html = ""
@@ -57,7 +61,7 @@ class PostPinHeaderView: PostHeaderView {
 
 }
 
-extension PostPinHeaderView: RichEditorDelegate {
+extension DCPinView: RichEditorDelegate {
     
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
         if content.isEmpty || self.editorView.html == "<br>" {
@@ -87,4 +91,3 @@ extension PostPinHeaderView: RichEditorDelegate {
         self.replyView.isHidden = true
     }
 }
-

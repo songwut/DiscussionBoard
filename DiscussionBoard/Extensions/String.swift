@@ -7,6 +7,11 @@
 
 import Foundation
 extension String {
+    
+    func dateTimeAgo() -> String {
+        return self
+    }
+    
     func localized() -> String {
         return self
         /*

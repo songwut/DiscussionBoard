@@ -1,15 +1,28 @@
 //
-//  PostHeaderView.swift
+//  DCPostView.swift
 //  DiscussionBoard
 //
-//  Created by Songwut Maneefun on 15/1/2564 BE.
+//  Created by Songwut Maneefun on 21/1/2564 BE.
 //
 
 import UIKit
+import RichEditorView
 
-let maxReplyList = 2
+class DCPostView: DCBasePostView {
+    
+    class func instanciateFromNib() -> DCPostView {
+        return Bundle.main.loadNibNamed("DCPostView", owner: nil, options: nil)![0] as! DCPostView
+    }
+    
+}
 
-class PostHeaderView: UITableViewHeaderFooterView {
+
+class DCBasePostView: UIView {
+    @IBOutlet weak var editView: UIView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var editorView: RichEditorView!
+    @IBOutlet weak var editorHeight: NSLayoutConstraint!
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var authorNameLabel: UILabel!
@@ -17,11 +30,12 @@ class PostHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
     @IBOutlet weak var seeMoreReplyButton: UIButton!
     
+    var editorHelper:EditorHelper!
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     var isReplyAll = false
     var didReload: DidAction?
@@ -66,12 +80,16 @@ class PostHeaderView: UITableViewHeaderFooterView {
         
     }
     
-    class func instanciateFromNib() -> PostHeaderView {
-        return Bundle.main.loadNibNamed("PostHeaderView", owner: nil, options: nil)![0] as! PostHeaderView
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.editView.isHidden = true
+        self.editorHelper = EditorHelper()
+        self.editorHelper.cancelButton = self.cancelButton
+        self.editorHelper.editView = self.editView
+        self.editorHelper.editButton = self.editButton
+        self.editorHelper.editorView = self.editorView
+        self.editorHelper.editorHeight = self.editorHeight
+        
         self.seeMoreReplyButton.isHidden = true
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
@@ -88,18 +106,35 @@ class PostHeaderView: UITableViewHeaderFooterView {
     func updateUIColor(isPin:Bool) {
         self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
         self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
-        self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
         
-        self.dateLabel.textColor = .secondary()
-        self.linkLabel.textColor = isPin ? .primary() : .secondary()
-        self.replyLabel.textColor = isPin ? .primary() : .secondary()
-        self.likeButton.tintColor = isPin ? .primary() : .secondary()
+        let color = isPin ? .primary() : UIColor(hex: "EFEFF0")
+        self.dateLabel.textColor = color
+        self.linkLabel.textColor = color
+        self.replyButton.setTitleColor(color, for: .normal)
+        self.likeButton.tintColor = color
     }
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {
         self.isReplyAll = true
         self.seeMoreReplyButton.isHidden = true
         self.didReload?.handler(self)
+    }
+    
+    @IBAction func replyPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func likePressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func editPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func canclePressed(_ sender: UIButton) {
+        
     }
 
     @objc func tapIconHeader(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -117,5 +152,4 @@ class PostHeaderView: UITableViewHeaderFooterView {
     func setCollapsed(_ collapsed: Bool) {
         //arrowImageView.rotate(collapsed ? 0.0 : .pi)
     }
-    
 }

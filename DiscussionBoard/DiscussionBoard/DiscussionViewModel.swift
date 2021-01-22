@@ -17,6 +17,7 @@ class DiscussionViewModel {
             DiscussionPostResult.with(["body" : "text html", "reply_list": ""])!
         ]
     */
+    var currentMenu:DiscussionMenuType?
     var postList = [DiscussionPostResult]()
     
     func prepareData(complete: () -> ()) {

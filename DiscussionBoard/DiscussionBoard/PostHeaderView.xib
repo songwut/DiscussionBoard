@@ -10,14 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="9FG-eC-02V" customClass="PostHeaderView" customModule="DiscussionBoard" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="9FG-eC-02V" customClass="PostHeaderView" customModule="B2C" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="500" height="373"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UIS-bJ-sBl">
                     <rect key="frame" x="16" y="0.0" width="468" height="353"/>
                     <subviews>
-                        <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6r-f2-G17">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6r-f2-G17">
                             <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
                             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -220,7 +220,7 @@
                 <outlet property="authorImageView" destination="NY4-oQ-Fok" id="4Y0-02-FZC"/>
                 <outlet property="authorNameLabel" destination="B8r-pi-QGQ" id="n3X-d1-dSn"/>
                 <outlet property="dateLabel" destination="mVt-of-xAo" id="LOb-ac-jbi"/>
-                <outlet property="linkButton" destination="Gww-0R-4K5" id="USI-kI-pN0"/>
+                <outlet property="likeButton" destination="Gww-0R-4K5" id="A3h-gm-ya5"/>
                 <outlet property="linkLabel" destination="Od9-YK-QtJ" id="cTV-hS-PJU"/>
                 <outlet property="replyLabel" destination="Jbq-Sh-IDt" id="fG8-vj-N3n"/>
                 <outlet property="seeMoreReplyButton" destination="j7H-jk-7Gw" id="oEK-mg-k6w"/>

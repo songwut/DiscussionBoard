@@ -8,13 +8,16 @@
 import UIKit
 import RxSwift
 
+let DBMaxHeightReply = 224
 class DiscussionViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
     weak var postVC:DiscussionPostViewController!
+    //weak var pinVC:DCPinListViewController!
 
     var postView: UIView!
+    var pinView: UIView!
     private let disposeBag = DisposeBag()
     private let viewModel = DiscussionViewModel()
     
@@ -41,9 +44,16 @@ class DiscussionViewController: UIViewController {
         self.tableView.rx.setDataSource(self).disposed(by: disposeBag)
         
         self.postView = self.createPostView()
+        self.postVC.didMenuSelected = DidAction(handler: { (sender) in
+            if let type = sender as? DiscussionMenuType {
+                self.viewModel.currentMenu = type
+                self.reloadUI()
+            }
+        })
         self.postVC.didPost = DidAction(handler: { (sender) in
             if let html = sender as? String {
                 self.viewModel.post(html: html) { (post) in
+                    self.postVC.updateUI()
                     self.reloadDirect()
                 }
             }
@@ -56,7 +66,12 @@ class DiscussionViewController: UIViewController {
     func reloadUI() {
         self.viewModel.prepareData {
             self.postVC.updateUI()
-            self.tableView.reloadData()
+            
+            if let pinIndex = self.viewModel.pinIndex {
+                
+            } else {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -83,7 +98,6 @@ class DiscussionViewController: UIViewController {
             })
         }
         return self.postVC.view
-        
     }
     
     func bindTableView() {
@@ -116,17 +130,22 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.postList[section].replyList.count
+        let post = self.viewModel.postList[section]
+        if post.isPinned , section == 0 {
+            return 0
+        } else {
+            return post.replyList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReply") as! ReplyTableViewCell
         let post = self.viewModel.postList[indexPath.section]
+        if post.isPinned , indexPath.section == 0 {
+            
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReply") as! ReplyTableViewCell
         
-        //TODO: show pin
-        //cell.isPostPin = post.isPinned && indexPath.section == 0
-        cell.reply = self.viewModel.postList[indexPath.section].replyList[indexPath.row]
-        
+        cell.reply = post.replyList[indexPath.row]
         return cell
     }
     
@@ -139,28 +158,14 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
         
         let post = self.viewModel.postList[section]
         
-        if section == 0 {
-            let pin = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPostPin") as! PostPinHeaderView
-            pin.post = post
-            pin.replyAuthor = post.author
-            //TODO: show pin
-            //pin.updateReplyUI()
-            pin.didReply = DidAction(handler: { (sender) in
-                guard let html = sender as? String else { return }
-                self.viewModel.reply(html: html, post: post) { (reply) in
-                    self.reloadDirect()
-                }
-            })
-            pin.didReload = DidAction(handler: { (sender) in
-                self.viewModel.replyList(post: post) { (replyList) in
-                    self.reloadDirect()
-                }
-            })
-            return pin
+        if post.isPinned, section == 0 {
+            //self.pinVC?.contentHeight.constant = self.pinVC?.tableView.contentSize.height ?? 0.0
+            
+            return nil
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "cellPost") as! PostHeaderView
             header.post = post
-            header.updateReplyUI()
+            header.updateReplyUI(post: post)
             header.didReload = DidAction(handler: { (sender) in
                 self.viewModel.replyList(post: post) { (replyList) in
                     self.reloadDirect()
@@ -207,13 +212,15 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboardView))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboardView(_:)))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
-    @objc func dismissKeyboardView() {
-        view.endEditing(true)
+    @objc func dismissKeyboardView(_ gesture: UITapGestureRecognizer?) {
+        if let tap = gesture, let view = tap.view {
+            //view.endEditing(true)
+        }
     }
 }
 

@@ -1,13 +1,24 @@
 //
-//  ReplyTableViewCell.swift
+//  DCReplyView.swift
 //  DiscussionBoard
 //
-//  Created by Songwut Maneefun on 15/1/2564 BE.
+//  Created by Songwut Maneefun on 21/1/2564 BE.
 //
 
 import UIKit
+import RichEditorView
 
-class ReplyTableViewCell: UITableViewCell {
+class DCReplyView: UIView {
+    
+    class func instanciateFromNib() -> DCReplyView {
+        return Bundle.main.loadNibNamed("DCReplyView", owner: nil, options: nil)![0] as! DCReplyView
+    }
+    
+    @IBOutlet weak var editView: UIView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var editorView: RichEditorView!
+    @IBOutlet weak var editorHeight: NSLayoutConstraint!
     
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
@@ -15,7 +26,7 @@ class ReplyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
@@ -42,8 +53,7 @@ class ReplyTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
-        
+        self.editView.isHidden = true
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
@@ -55,21 +65,16 @@ class ReplyTableViewCell: UITableViewCell {
         self.didLikePressed?.handler(self.reply)
     }
     
+    
     func updateUIColor() {
         self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
         self.linkLabel.font = FontHelper.getFontSystem(.small , font: .bold)
-        self.replyLabel.font = FontHelper.getFontSystem(.small , font: .bold)
+        self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
         let gray = UIColor(hex: "EFEFF0")
         self.dateLabel.textColor = gray
         self.linkLabel.textColor = gray
-        self.replyLabel.textColor = gray
+        self.replyButton.setTitleColor(gray, for: .normal)
         self.likeButton.tintColor = gray
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

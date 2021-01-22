@@ -15,6 +15,8 @@ class PostFooterView: UITableViewHeaderFooterView {
     @IBOutlet weak var replyAuthorImageView: UIImageView!
     @IBOutlet var editorView: RichEditorView!
     
+    @IBOutlet weak var editorHeight: NSLayoutConstraint!
+    
     var didReply: DidAction?
     var didUpdateLayout: DidAction?
     
@@ -47,6 +49,16 @@ class PostFooterView: UITableViewHeaderFooterView {
 }
 
 extension PostFooterView: RichEditorDelegate {
+    
+    func richEditor(_ editor: RichEditorView, heightDidChange height: Int) {
+        if height < DBMaxHeightReply {
+            let h = height <= 33 ? 33 : height
+            self.editorHeight.constant = CGFloat(h)
+            self.didUpdateLayout?.handler(CGFloat(h))
+            print("heightDidChange: \(h)")
+        }
+    }
+    
     func richEditorTookFocus(_ editor: RichEditorView) {
         self.replyView.isHidden = false
         self.didUpdateLayout?.handler(self)
