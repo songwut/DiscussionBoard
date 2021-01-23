@@ -20,6 +20,12 @@ class DiscussionViewModel {
     var currentMenu:DiscussionMenuType?
     var postList = [DiscussionPostResult]()
     
+    func myProfile() -> ProfileResult? {
+        //TODO:change profile to type profile result
+        let profile = ProfileResult(JSON: ["image" : "https://gravatar.com/avatar/91e77ea2e99a0bf7d73d04ac2739860d?s=400&d=mp&r=x"])
+        return profile
+    }
+    
     func prepareData(complete: () -> ()) {
         var list = [DiscussionPostResult]()
         JSON.read("post") { (result) in

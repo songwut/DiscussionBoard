@@ -29,7 +29,7 @@ class DiscussionListViewController: UIViewController {
     weak var postVC:DiscussionPostViewController!
     var pinVC:DCPinListViewController!
     
-    var pinView: DCBasePostView!
+    var pinView: DCPinView!
     var postViewList = [Int: PostObj]()
     var isSaveOfset = true
     var tableViewOfset:CGPoint = .zero
@@ -71,18 +71,42 @@ class DiscussionListViewController: UIViewController {
             self.pinBorderView.backgroundColor = .primary_10()
             self.pinStackView.removeAllArrangedSubviews()
             self.pinView = DCPinView.instanciateFromNib()
-            self.pinView.post = self.viewModel.postList[pinIndex]
+            let pinPost = self.viewModel.postList[pinIndex]
+            self.pinView.post = pinPost
+            self.pinView.didReplyPressed = DidAction(handler: { (sender) in
+                if self.pinView.addReplyView == nil {
+                    let addReplyView = self.createAddReplyView()
+                    self.pinView.addReplyStackView.addArrangedSubview(addReplyView)
+                }
+            })
+            
+            
             self.pinStackView.isHidden = false
             self.pinStackView.addArrangedSubview(self.pinView)
             
             //pin item
             self.pinItemStackView.removeAllArrangedSubviews()
             var index = 0
+            let postObj = PostObj()
+            postObj.postView = self.pinView
             for reply in self.viewModel.postList[pinIndex].replyList {
                 if index < 2 {
+                    //let replyView = self.createReply(reply)
+                    //replyView.marginLeft.constant = 52
+                    //self.pinItemStackView.addArrangedSubview(replyView)
+                    
                     let replyView = self.createReply(reply)
-                    replyView.marginLeft.constant = 52
-                    self.pinItemStackView.addArrangedSubview(replyView)
+                    postObj.replyList.append(replyView)
+                    self.pinView.itemStackView.addArrangedSubview(replyView)
+                    replyView.didReplyPressed = DidAction(handler: { (sender) in
+                        if self.pinView.addReplyView == nil {
+                            let addReplyView = self.createAddReplyView()
+                            self.pinView.addReplyView = addReplyView
+                            self.pinView.addReplyStackView.addArrangedSubview(addReplyView)
+                        }
+                        
+                    })
+                    
                     index += 1
                 }
             }
@@ -106,6 +130,13 @@ class DiscussionListViewController: UIViewController {
                     //self.reloadDirect()
                 }
             })
+            postView.didReplyPressed = DidAction(handler: { (sender) in
+                if postView.addReplyView == nil {
+                    let addReplyView = self.createAddReplyView()
+                    postView.addReplyView = addReplyView
+                    postView.addReplyStackView.addArrangedSubview(addReplyView)
+                }
+            })
             
             //reply item
             postView.itemStackView.removeAllArrangedSubviews()
@@ -117,12 +148,25 @@ class DiscussionListViewController: UIViewController {
                     let replyView = self.createReply(reply)
                     postObj.replyList.append(replyView)
                     postView.itemStackView.addArrangedSubview(replyView)
+                    replyView.didReplyPressed = DidAction(handler: { (sender) in
+                        if postView.addReplyView == nil {
+                            let addReplyView = self.createAddReplyView()
+                            postView.addReplyView = addReplyView
+                            postView.addReplyStackView.addArrangedSubview(addReplyView)
+                        }
+                    })
                     index += 1
                 }
             }
             self.postViewList[post.id] = postObj
             self.postItemStackView.addArrangedSubview(postView)
         }
+    }
+    
+    func createAddReplyView() -> DCAddReplyView {
+        let addReplyView = DCAddReplyView.instanciateFromNib()
+        addReplyView.profile = self.viewModel.myProfile()
+        return addReplyView
     }
     
     func createReply(_ reply:DiscussionReplyResult) -> DCReplyView {

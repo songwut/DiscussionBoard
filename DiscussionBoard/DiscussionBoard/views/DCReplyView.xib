@@ -227,12 +227,18 @@
                                                                     <state key="normal" title="Like" image="thumbs">
                                                                         <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="likeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LeW-0T-yMs"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qD4-0M-nyH">
                                                                     <rect key="frame" x="191" y="0.0" width="39" height="24"/>
                                                                     <state key="normal" title="Reply">
                                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="replyPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ryh-Fh-ez9"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
