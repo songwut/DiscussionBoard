@@ -65,6 +65,44 @@ class DiscussionViewModel {
         }
     }
     
+    func edit(html:String, item:Any?, complete:@escaping ( _ content: Any?) -> ()) {
+        if let post = item as? DiscussionPostResult {
+            post.body = html
+        } else if let reply = item as? DiscussionReplyResult {
+            reply.body = html
+        }
+        complete(item)
+        /*
+        
+        let request = DiscussionUpdateRequest()
+        request.contentId = self.contentId
+        request.contentType = self.contentType
+        request.commentId = post.id
+        request.body = html
+        API.request(request) { (responseBody: ResponseBody?, replyResult: DiscussionReplyResult?, isCache, error) in
+            if let reply = replyResult {
+                post.replyList.append(reply)
+                complete(reply)
+            }
+        }
+        */
+    }
+    
+    func delete(view:Any?, complete:@escaping ( _ done: Bool?) -> ()) {
+        if let postView = view as? DCPostView,
+           let post = postView.post {
+            
+            
+        } else if let pinView = view as? DCPinView,
+                  let pin = pinView.post  {
+            
+        } else if let replyView = view as? DCReplyView,
+                  let reply = replyView.reply  {
+            
+        }
+        complete(true)
+    }
+    
     func reply(html:String, post:DiscussionPostResult, complete: ( _ reply: DiscussionReplyResult) -> ()) {
         if let reply = DiscussionReplyResult.with(["body" : html]) {
             post.replyList.append(reply)

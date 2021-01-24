@@ -31,7 +31,7 @@ class DiscussionPostViewController: UIViewController {
     var viewModel: DiscussionViewModel?
 
     @IBOutlet var titleLabel: UILabel!
-    
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var selectFilterView: UIView!
     @IBOutlet var currentButton: DiscussionMenuButton!
     @IBOutlet var latestButton: DiscussionMenuButton!
@@ -42,6 +42,7 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var editorView: RichEditorView!
     @IBOutlet var editorToolStackView: UIStackView!
     @IBOutlet var editorToolView: UIView!
+    @IBOutlet var editorToolView2: UIView!
     @IBOutlet var postButton: UIButton!
     
     @IBOutlet var boldButton: UIButton!
@@ -68,13 +69,21 @@ class DiscussionPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.uiStackView.updateLayout()
-        
+        self.imageView.circle()
+        let profileImage = self.viewModel?.myProfile()?.image ?? ""
+        self.imageView.setImage(profileImage, placeholderImage: nil)
         self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
         
         self.editorToolView.layer.borderWidth = 1
         self.editorToolView.layer.borderColor = self.gray.cgColor
         self.editorToolView.layer.cornerRadius = 4
         self.editorToolView.clipsToBounds = true
+        
+        self.editorToolView2.layer.borderWidth = 1
+        self.editorToolView2.layer.borderColor = self.gray.cgColor
+        self.editorToolView2.layer.cornerRadius = 4
+        self.editorToolView2.clipsToBounds = true
+        
         self.editorView.delegate = self
         
         self.boldButton.imageView?.tintColor = .black
@@ -157,6 +166,12 @@ class DiscussionPostViewController: UIViewController {
         }
     }
     
+    func resetStyle(_ sender: UIButton) {
+        sender.isSelected = false
+        sender.backgroundColor = .white
+        sender.imageView?.tintColor = .black
+    }
+    
     func updateSelected(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
@@ -205,13 +220,12 @@ class DiscussionPostViewController: UIViewController {
             print("textHtml:")
             print(textHtml)
         }
-        self.boldButton.isSelected = false
-        self.italicButton.isSelected = false
-        self.underlineButton.isSelected = false
         
-        self.updateSelected(self.boldButton)
-        self.updateSelected(self.italicButton)
-        self.updateSelected(self.underlineButton)
+        self.resetStyle(self.boldButton)
+        self.resetStyle(self.italicButton)
+        self.resetStyle(self.underlineButton)
+        self.resetStyle(self.bulletButton)
+        self.resetStyle(self.numberButton)
         
         self.view.endEditing(true)
         self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
@@ -226,12 +240,12 @@ extension DiscussionPostViewController: RichEditorDelegate {
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
         if content.isEmpty || self.editorView.html == "<br>" {
             self.htmlContent = nil
-            self.postButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
-            self.editorBorderView.borderColor = UIColor(hex: "D7D8D9")
+            self.postButton.setStyleColor(false, titleColor: .white, bgColor: DCStyle.disable())
+            self.editorBorderView.borderColor = DCStyle.editEnd()
         } else {
-            self.postButton.setStyleColor(true, titleColor: .white, bgColor: .primary())
+            self.postButton.setStyleColor(true, titleColor: .white, bgColor: DCStyle.active())
             self.htmlContent = content
-            self.editorBorderView.borderColor = .primary()
+            self.editorBorderView.borderColor = DCStyle.editStart()
         }
     }
     
