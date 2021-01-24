@@ -16,18 +16,13 @@ class DCPostView: DCBasePostView {
     
     @IBOutlet weak var itemStackView: UIStackView!
     @IBOutlet weak var addReplyStackView: UIStackView!
+    
     var addReplyView: DCAddReplyView?
 }
 
 
 class DCBasePostView: DCReactionView {
-    @IBOutlet weak var editView: UIView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var editorView: RichEditorView!
-    @IBOutlet weak var editorHeight: NSLayoutConstraint!
-
-    @IBOutlet weak var textView: UITextView!
+    
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     
@@ -36,7 +31,7 @@ class DCBasePostView: DCReactionView {
     var editorHelper:EditorHelper!
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     var isReplyAll = false
-    var didReload: DidAction?
+    var didSeeMoreReply: DidAction?
     var replyList:[DiscussionReplyResult]?
     
     var post: DiscussionPostResult? {
@@ -45,7 +40,7 @@ class DCBasePostView: DCReactionView {
                 self.content = post
                 if let author = post.author {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
-                    self.authorNameLabel.text = author.name
+                    self.authorNameLabel.text = post.authorTitle()
                 }
                 self.dateLabel.text = post.datetimeCreate.dateTimeAgo()
                 let font = self.textView.font ?? textViewFont
@@ -80,14 +75,6 @@ class DCBasePostView: DCReactionView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.editView.isHidden = true
-        self.editorHelper = EditorHelper()
-        self.editorHelper.borderView = self.editView.superview
-        self.editorHelper.cancelButton = self.cancelButton
-        self.editorHelper.editView = self.editView
-        self.editorHelper.editButton = self.editButton
-        self.editorHelper.editorView = self.editorView
-        self.editorHelper.editorHeight = self.editorHeight
         
         self.seeMoreReplyButton.isHidden = true
         self.authorImageView.setCircle()
@@ -101,22 +88,19 @@ class DCBasePostView: DCReactionView {
         self.seeMoreReplyButton.imageView?.tintColor = UIColor(hex: "8F9295")
         self.seeMoreReplyButton.tintColor = UIColor(hex: "8F9295")
         self.seeMoreReplyButton.titleLabel?.font = FontHelper.getFontSystem(.small , font: .text)
+        
     }
     
-    
+    override func updateEditContent() {
+        self.dateLabel.text = self.post?.datetimeCreate.dateTimeAgo()
+        let font = self.textView.font ?? textViewFont
+        self.textView.attributedText = self.post?.body.html2Atb(font: font)
+    }
     
     @IBAction func seeMoreReplyPressed(_ sender: UIButton) {
         self.isReplyAll = true
         self.seeMoreReplyButton.isHidden = true
-        self.didReload?.handler(self)
-    }
-    
-    @IBAction func editPressed(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func canclePressed(_ sender: UIButton) {
-        
+        self.didSeeMoreReply?.handler(self)
     }
 
     @objc func tapIconHeader(_ gestureRecognizer: UITapGestureRecognizer) {

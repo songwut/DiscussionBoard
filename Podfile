@@ -10,6 +10,7 @@ pod 'RxSwift', '6.0.0'
 pod 'RxCocoa', '6.0.0'
 pod 'RxDataSources'
 pod 'SDWebImage'
+pod 'IQKeyboardManagerSwift', '6.3.0'
 end
 
 target 'DiscussionBoard' do

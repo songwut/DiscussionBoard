@@ -17,7 +17,8 @@ class DCAddReplyView: UIView {
     @IBOutlet weak var editorHeight: NSLayoutConstraint!
     
     var didReply: DidAction?
-    var didUpdateLayout: DidAction?
+    
+    var post: DiscussionPostResult?
     
     class func instanciateFromNib() -> DCAddReplyView {
         return Bundle.main.loadNibNamed("DCAddReplyView", owner: nil, options: nil)![0] as! DCAddReplyView
@@ -51,9 +52,9 @@ extension DCAddReplyView: RichEditorDelegate {
     
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
         if content.isEmpty || self.editorView.html == "<br>" {
-            self.replyButton.setStyleColor(false, titleColor: .white, bgColor: .lightGray)
+            self.replyButton.setStyleColor(false, titleColor: .white, bgColor: DCStyle.disable())
         } else {
-            self.replyButton.setStyleColor(true, titleColor: .white, bgColor: .primary())
+            self.replyButton.setStyleColor(true, titleColor: .white, bgColor: DCStyle.active())
         }
     }
     
@@ -61,18 +62,15 @@ extension DCAddReplyView: RichEditorDelegate {
         if height < DBMaxHeightReply {
             let h = height <= 33 ? 33 : height
             self.editorHeight.constant = CGFloat(h)
-            self.didUpdateLayout?.handler(CGFloat(h))
             print("heightDidChange: \(h)")
         }
     }
     
     func richEditorTookFocus(_ editor: RichEditorView) {
         self.replyView.isHidden = false
-        self.didUpdateLayout?.handler(self)
     }
     
     func richEditorLostFocus(_ editor: RichEditorView) {
         self.replyView.isHidden = true
-        self.didUpdateLayout?.handler(self)
     }
 }

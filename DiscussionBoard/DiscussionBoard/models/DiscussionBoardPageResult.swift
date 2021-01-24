@@ -72,6 +72,16 @@ class DiscussionPostResult: BaseResult {
     //var mentionedList: [List]
     //var imageList: [List]
     
+    func authorTitle() -> String {
+        let auName = self.author?.name ?? ""
+        if self.authorRole == "User" {
+            return auName
+        } else {
+            let roleText = " [\(self.authorRole)]"
+            return auName + roleText
+        }
+    }
+    
     func isReplyFull() -> Bool {
         return self.replyList.count == self.countReplies
     }

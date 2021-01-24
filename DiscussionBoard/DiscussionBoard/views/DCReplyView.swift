@@ -15,15 +15,9 @@ class DCReplyView: DCReactionView {
     }
     
     @IBOutlet weak var marginLeft: NSLayoutConstraint!
-    @IBOutlet weak var editView: UIView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var editorView: RichEditorView!
-    @IBOutlet weak var editorHeight: NSLayoutConstraint!
     
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
-    @IBOutlet weak var textView: UITextView!
     
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     
@@ -35,7 +29,7 @@ class DCReplyView: DCReactionView {
                 self.content = reply
                 if let author = reply.author {
                     self.authorImageView.setImage(author.image, placeholderImage: nil)
-                    self.authorNameLabel.text = author.name
+                    self.authorNameLabel.text = reply.authorTitle()
                 }
                 self.dateLabel.text = reply.datetimeCreate.dateTimeAgo()
                 let font = self.textView.font ?? textViewFont
@@ -48,11 +42,9 @@ class DCReplyView: DCReactionView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.editView.isHidden = true
         self.authorImageView.setCircle()
         self.authorNameLabel.font = FontHelper.getFontSystem(.small , font: .medium)
         self.textView.font = textViewFont
-        self.likeButton.addTarget(self, action: #selector(self.likeButtonPressed(_:)), for: .touchUpInside)
         self.updateUIColor()
     }
     

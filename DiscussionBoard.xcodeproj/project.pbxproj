@@ -115,6 +115,15 @@
 		6961FB9A25BB27430052B810 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961FB9925BB27420052B810 /* Font.swift */; };
 		6961FB9B25BB27430052B810 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961FB9925BB27420052B810 /* Font.swift */; };
 		6961FB9C25BB27430052B810 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961FB9925BB27420052B810 /* Font.swift */; };
+		696B43E725BD2E5200750CAA /* DCEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43E625BD2E5200750CAA /* DCEditView.swift */; };
+		696B43E825BD2E5200750CAA /* DCEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43E625BD2E5200750CAA /* DCEditView.swift */; };
+		696B43ED25BD2E6500750CAA /* DCEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696B43EC25BD2E6500750CAA /* DCEditView.xib */; };
+		696B43EE25BD2E6500750CAA /* DCEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 696B43EC25BD2E6500750CAA /* DCEditView.xib */; };
+		696B43F625BD3F8200750CAA /* DCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43F525BD3F8200750CAA /* DCStyle.swift */; };
+		696B43F725BD3F8200750CAA /* DCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43F525BD3F8200750CAA /* DCStyle.swift */; };
+		696B43FF25BD623F00750CAA /* PopupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43FE25BD623F00750CAA /* PopupEditViewController.swift */; };
+		696B440025BD623F00750CAA /* PopupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696B43FE25BD623F00750CAA /* PopupEditViewController.swift */; };
+		696B441425BDF09000750CAA /* pin_reply_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 696B441325BDF09000750CAA /* pin_reply_list.json */; };
 		696F11BE25B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
 		696F11BF25B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
 		696F11C025B5F5590006E76E /* PostPinHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */; };
@@ -206,6 +215,11 @@
 		6958ABFD25BC91D8007159D2 /* DCReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCReactionView.swift; sourceTree = "<group>"; };
 		6958AC0D25BCA55F007159D2 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
 		6961FB9925BB27420052B810 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		696B43E625BD2E5200750CAA /* DCEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCEditView.swift; sourceTree = "<group>"; };
+		696B43EC25BD2E6500750CAA /* DCEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCEditView.xib; sourceTree = "<group>"; };
+		696B43F525BD3F8200750CAA /* DCStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCStyle.swift; sourceTree = "<group>"; };
+		696B43FE25BD623F00750CAA /* PopupEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupEditViewController.swift; sourceTree = "<group>"; };
+		696B441325BDF09000750CAA /* pin_reply_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pin_reply_list.json; sourceTree = "<group>"; };
 		696F11BD25B5F5590006E76E /* PostPinHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPinHeaderView.swift; sourceTree = "<group>"; };
 		696F11C425B5F5650006E76E /* PostPinHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPinHeaderView.xib; sourceTree = "<group>"; };
 		69D6818825B466830017F986 /* reply_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reply_list.json; sourceTree = "<group>"; };
@@ -270,6 +284,7 @@
 				692359B125B1A77900F1880A /* PublicSetting.swift */,
 				69235A0825B201F000F1880A /* Results.swift */,
 				69235A1925B3162E00F1880A /* JSON.swift */,
+				696B441325BDF09000750CAA /* pin_reply_list.json */,
 				69D6818825B466830017F986 /* reply_list.json */,
 				69235A2025B316B000F1880A /* post.json */,
 				69235A6E25B34D0200F1880A /* Extensions */,
@@ -340,6 +355,8 @@
 				693D7E2925B9279200596387 /* DCReplyView.xib */,
 				6958ABF425BBF9DF007159D2 /* DCAddReplyView.swift */,
 				6958ABF325BBF9DF007159D2 /* DCAddReplyView.xib */,
+				696B43E625BD2E5200750CAA /* DCEditView.swift */,
+				696B43EC25BD2E6500750CAA /* DCEditView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -347,14 +364,11 @@
 		6950063125B73B2600AB7C9C /* DiscussionBoard */ = {
 			isa = PBXGroup;
 			children = (
-				6958AC0D25BCA55F007159D2 /* ProfileResult.swift */,
-				693D7E4325B94AD900596387 /* DiscussionListViewController.swift */,
-				692359CA25B1DFE800F1880A /* DiscussionViewController.swift */,
-				6943190D25B81B1C0053B477 /* DCPinListViewController.swift */,
-				692359F125B1FE8D00F1880A /* DiscussionViewModel.swift */,
-				69235A0125B201BE00F1880A /* DiscussionBoardPageResult.swift */,
-				692359BD25B1C27E00F1880A /* DiscussionPostViewController.swift */,
+				693D7E1B25B9273E00596387 /* views */,
+				696B43DE25BD2D6000750CAA /* models */,
+				696B43DF25BD2DCA00750CAA /* controllers */,
 				69D6819225B499560017F986 /* PostFooterView.swift */,
+				696B43F525BD3F8200750CAA /* DCStyle.swift */,
 				69D6819925B499660017F986 /* PostFooterView.xib */,
 				692359E025B1F74D00F1880A /* PostHeaderView.swift */,
 				69235A0F25B20D6C00F1880A /* PostHeaderView.xib */,
@@ -362,11 +376,32 @@
 				696F11C425B5F5650006E76E /* PostPinHeaderView.xib */,
 				692359D525B1F64700F1880A /* ReplyTableViewCell.swift */,
 				692359D625B1F64700F1880A /* ReplyTableViewCell.xib */,
-				693D7E1B25B9273E00596387 /* views */,
 				692359C525B1C2F000F1880A /* Discussion.storyboard */,
 				6923597225B177AB00F1880A /* Assets.xcassets */,
 			);
 			path = DiscussionBoard;
+			sourceTree = "<group>";
+		};
+		696B43DE25BD2D6000750CAA /* models */ = {
+			isa = PBXGroup;
+			children = (
+				6958AC0D25BCA55F007159D2 /* ProfileResult.swift */,
+				69235A0125B201BE00F1880A /* DiscussionBoardPageResult.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		696B43DF25BD2DCA00750CAA /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				693D7E4325B94AD900596387 /* DiscussionListViewController.swift */,
+				696B43FE25BD623F00750CAA /* PopupEditViewController.swift */,
+				692359CA25B1DFE800F1880A /* DiscussionViewController.swift */,
+				6943190D25B81B1C0053B477 /* DCPinListViewController.swift */,
+				692359F125B1FE8D00F1880A /* DiscussionViewModel.swift */,
+				692359BD25B1C27E00F1880A /* DiscussionPostViewController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 		B05748F39C974A38EC9BB9E8 /* Pods */ = {
@@ -499,6 +534,7 @@
 				6950064625B73BD300AB7C9C /* Assets.xcassets in Resources */,
 				6958ABF525BBF9DF007159D2 /* DCAddReplyView.xib in Resources */,
 				6923597625B177AB00F1880A /* LaunchScreen.storyboard in Resources */,
+				696B441425BDF09000750CAA /* pin_reply_list.json in Resources */,
 				69235A3A25B338C900F1880A /* IBMPlexSansThai-Bold.ttf in Resources */,
 				693D7E1225B9272800596387 /* DCPostView.xib in Resources */,
 				69235A2125B316B000F1880A /* post.json in Resources */,
@@ -508,6 +544,7 @@
 				696F11C525B5F5650006E76E /* PostPinHeaderView.xib in Resources */,
 				6923597325B177AB00F1880A /* Assets.xcassets in Resources */,
 				6923597125B177A800F1880A /* Main.storyboard in Resources */,
+				696B43ED25BD2E6500750CAA /* DCEditView.xib in Resources */,
 				69235A1025B20D6C00F1880A /* PostHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +566,7 @@
 				693D7E0225B926B600596387 /* DCPinView.xib in Resources */,
 				69235A2225B316B000F1880A /* post.json in Resources */,
 				693D7E1325B9272800596387 /* DCPostView.xib in Resources */,
+				696B43EE25BD2E6500750CAA /* DCEditView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,8 +639,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				696B43FF25BD623F00750CAA /* PopupEditViewController.swift in Sources */,
 				6950062425B6D26A00AB7C9C /* String.swift in Sources */,
 				6923596E25B177A800F1880A /* ViewController.swift in Sources */,
+				696B43E725BD2E5200750CAA /* DCEditView.swift in Sources */,
 				69235A1A25B3162E00F1880A /* JSON.swift in Sources */,
 				696F11BE25B5F5590006E76E /* PostPinHeaderView.swift in Sources */,
 				69235A4725B33AB700F1880A /* UIImageView.swift in Sources */,
@@ -611,6 +651,7 @@
 				692359D725B1F64700F1880A /* ReplyTableViewCell.swift in Sources */,
 				6961FB9A25BB27430052B810 /* Font.swift in Sources */,
 				692359B225B1A77900F1880A /* PublicSetting.swift in Sources */,
+				696B43F625BD3F8200750CAA /* DCStyle.swift in Sources */,
 				6950062B25B710A200AB7C9C /* CALayer.swift in Sources */,
 				69235A0225B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,
 				693D7E0825B9271100596387 /* DCPostView.swift in Sources */,
@@ -650,13 +691,16 @@
 				6950061E25B6D1CC00AB7C9C /* Int.swift in Sources */,
 				693D7E0925B9271100596387 /* DCPostView.swift in Sources */,
 				6943190825B809380053B477 /* UIButton.swift in Sources */,
+				696B43F725BD3F8200750CAA /* DCStyle.swift in Sources */,
 				69235A1B25B3162E00F1880A /* JSON.swift in Sources */,
+				696B43E825BD2E5200750CAA /* DCEditView.swift in Sources */,
 				69D6819425B499560017F986 /* PostFooterView.swift in Sources */,
 				6943190F25B81B1C0053B477 /* DCPinListViewController.swift in Sources */,
 				69235A0325B201BE00F1880A /* DiscussionBoardPageResult.swift in Sources */,
 				692359F325B1FE8E00F1880A /* DiscussionViewModel.swift in Sources */,
 				692359D825B1F64700F1880A /* ReplyTableViewCell.swift in Sources */,
 				693D7E4525B94ADA00596387 /* DiscussionListViewController.swift in Sources */,
+				696B440025BD623F00750CAA /* PopupEditViewController.swift in Sources */,
 				692359E225B1F74D00F1880A /* PostHeaderView.swift in Sources */,
 				6950062C25B710A200AB7C9C /* CALayer.swift in Sources */,
 				693D7DFB25B926A700596387 /* DCPinView.swift in Sources */,

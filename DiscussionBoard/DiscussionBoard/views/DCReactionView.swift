@@ -8,13 +8,17 @@
 import UIKit
 
 class DCReactionView: UIView {
+    
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var editStackView: UIStackView!
     
     let gray = UIColor(hex: "8F9295")
     var didLikePressed: DidAction?
     var didReplyPressed: DidAction?
+    var didEditingPressed: DidAction?
     var content:Any?
     
     func reaction(_ isLiked: Bool, _ countLikes:Int) {
@@ -37,6 +41,10 @@ class DCReactionView: UIView {
         }
     }
     
+    func updateEditContent() {
+        
+    }
+    
     func prepareUI() {
         self.dateLabel.font = .font(.small, .text)
         self.replyButton.titleFont = .font(.small, .bold)
@@ -47,6 +55,14 @@ class DCReactionView: UIView {
         
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.textViewLongPressed(_:)))
+        longPress.minimumPressDuration = 0.3
+        longPress.allowableMovement = 15
+        self.textView.addGestureRecognizer(longPress)
+    }
+    
     func updateUIColor(isPin:Bool) {
         self.dateLabel.font = FontHelper.getFontSystem(.small , font: .text)
         self.replyButton.titleFont = FontHelper.getFontSystem(.small , font: .bold)
@@ -54,6 +70,10 @@ class DCReactionView: UIView {
         self.dateLabel.textColor = self.gray
         self.replyButton.setTitleColor(self.gray, for: .normal)
         self.likeButton.tintColor = self.gray
+    }
+    
+    @objc func textViewLongPressed(_ sender: UIButton) {
+        self.didEditingPressed?.handler(self.content)
     }
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {

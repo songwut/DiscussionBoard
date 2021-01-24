@@ -16,7 +16,7 @@
       "is_pinned": true,
       "is_liked": false,
       "count_likes": 12789,
-      "count_replies": 4,
+      "count_replies": 3,
       "datetime_create": "datetime_create",
       "datetime_update": "datetime_update",
       "author_role": "Instructor",
@@ -105,8 +105,8 @@
       "body": "<b><i>หนา เอียง TEST SOME TEXT</i></b> and <b>ตัวหนา BOLD</b> recalcurate วิดีโอที่ ค่ะช่วงท้ายๆ ทำไมข้อมูลอยู่ๆงอกมาเป็นตรงกลางอะคะ รบกวนอธิบายละเอียดอีกทีได้ไหม",
       "parent": null,
       "is_edited": false,
-      "is_deletable": true,
-      "is_editable": true,
+      "is_deletable": false,
+      "is_editable": false,
       "is_pinned": false,
       "is_liked": false,
       "count_likes": 3,
@@ -116,7 +116,7 @@
       "author_role": "Instructor",
       "author": {
         "id": 1,
-        "name": "ชื่อไทย",
+        "name": "ชื่อไทย ลบไม่ได้",
         "image": "https://robohash.org/ae281cb450735a7bb54b52f3d4cf230b?set=set4&bgset=&size=400x400"
       },
       "mentioned_list": [

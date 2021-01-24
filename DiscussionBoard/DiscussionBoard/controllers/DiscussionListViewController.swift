@@ -91,9 +91,6 @@ class DiscussionListViewController: UIViewController {
             postObj.postView = self.pinView
             for reply in self.viewModel.postList[pinIndex].replyList {
                 if index < 2 {
-                    //let replyView = self.createReply(reply)
-                    //replyView.marginLeft.constant = 52
-                    //self.pinItemStackView.addArrangedSubview(replyView)
                     
                     let replyView = self.createReply(reply)
                     postObj.replyList.append(replyView)
