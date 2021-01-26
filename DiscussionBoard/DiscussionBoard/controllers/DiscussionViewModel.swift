@@ -9,6 +9,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+let DBMaxHeightReply = 224
+let maxReplyList = 2
+
 class DiscussionViewModel {
     /*
     var postList: [DiscussionPostResult] = [

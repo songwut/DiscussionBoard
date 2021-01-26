@@ -27,7 +27,6 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
     private let viewModel = DiscussionViewModel()
     
     weak var postVC:DiscussionPostViewController!
-    var pinVC:DCPinListViewController!
     
     var editingView:DCEditView!
     var pinView: DCPinView!
@@ -86,6 +85,7 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
             self.pinView = DCPinView.instanciateFromNib()
             let pinPost = self.viewModel.postList[pinIndex]
             self.pinView.post = pinPost
+            self.pinView.updateReplyUI(post: pinPost)
             self.pinView.didLikePressed = DidAction(handler: { (sender) in
                 self.reaction(content: pinPost, reactionView: self.pinView)
             })
@@ -133,10 +133,12 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
         }
         
         //post item
+        var postIndex = 0
         self.postItemStackView.removeAllArrangedSubviews()
         for post in self.viewModel.postList {
             let postView = DCPostView.instanciateFromNib()
             postView.post = post
+            postView.index = postIndex
             postView.updateReplyUI(post: post)
             
             postView.didLikePressed = DidAction(handler: { (sender) in
@@ -180,6 +182,8 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
             }
             self.postViewList[post.id] = postObj
             self.postItemStackView.addArrangedSubview(postView)
+            
+            postIndex += 1
         }
     }
     
@@ -221,6 +225,22 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
         postView.itemStackView.removeAllArranged()
         self.postViewList[post.id] = postObj
         self.postItemStackView.insertArrangedSubview(postView, at: 0)
+        
+        self.postScrolling(postObj)
+    }
+    
+    func postScrolling(_ postObj:PostObj) {
+        self.postItemStackView.layoutIfNeeded()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            let topY = self.postItemStackView.frame.origin.y
+            let navH = self.navigationController?.navigationBar.frame.height ?? 0.0
+            let point = CGPoint(x: 0, y: topY - navH)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+                self.scrollView.contentOffset = point
+            } completion: { (done) in
+                
+            }
+        }
     }
     
     func createReplyView(postView:DCPostView ,reply: DiscussionReplyResult, postObj:PostObj) {
@@ -304,11 +324,14 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
     
     
     func createPostView() {
-        self.postVC = (UIStoryboard(name: "Discussion", bundle: nil).instantiateViewController(withIdentifier: "DiscussionPostViewController") as! DiscussionPostViewController)
-        self.addChild(self.postVC)
-        self.postVC.viewModel = self.viewModel
-        self.postVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
-        self.postVC.didMove(toParent: self)
+        if self.postVC == nil {
+            self.postVC = (UIStoryboard(name: "Discussion", bundle: nil).instantiateViewController(withIdentifier: "DiscussionPostViewController") as! DiscussionPostViewController)
+            self.addChild(self.postVC)
+            self.postVC.viewModel = self.viewModel
+            self.postVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
+            self.postVC.didMove(toParent: self)
+        }
+        
         self.postVC.didMenuSelected = DidAction(handler: { (sender) in
             if let type = sender as? DiscussionMenuType {
                 self.viewModel.currentMenu = type
@@ -334,14 +357,6 @@ class DiscussionListViewController: UIViewController, UIScrollViewDelegate {
                 print("PostUI didLoaded")
             })
         }
-    }
-    
-    func createPinView() {
-        self.pinVC = (UIStoryboard(name: "Discussion", bundle: nil).instantiateViewController(withIdentifier: "DCPinListViewController") as! DCPinListViewController)
-        self.addChild(self.pinVC)
-        self.pinVC.viewModel = self.viewModel
-        self.pinVC.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
-        self.pinVC.didMove(toParent: self)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

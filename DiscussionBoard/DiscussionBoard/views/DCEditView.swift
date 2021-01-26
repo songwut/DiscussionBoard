@@ -15,8 +15,10 @@ class DCEditView: UIView {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var editorView: RichEditorView!
     @IBOutlet weak var editorHeight: NSLayoutConstraint!
+    @IBOutlet weak var limitLabel: UILabel!
     
     var didEdited: DidAction?
+    let limitCount = 2000
     
     class func instanciateFromNib() -> DCEditView {
         return Bundle.main.loadNibNamed("DCEditView", owner: nil, options: nil)![0] as! DCEditView
@@ -49,6 +51,11 @@ extension DCEditView: RichEditorDelegate {
         } else {
             self.editButton.setStyleColor(true, titleColor: .white, bgColor: DCStyle.active())
             editor.superview?.borderColor = DCStyle.editStart()
+        }
+        
+        DispatchQueue.main.async {
+            let text = editor.html.removeHtml
+            self.limitLabel.text = "\(text.count)/\(self.limitCount)"
         }
     }
     

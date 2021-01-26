@@ -8,6 +8,10 @@
 import Foundation
 extension String {
     
+    var removeHtml: String {
+          return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
+    
     func dateTimeAgo() -> String {
         return self
     }

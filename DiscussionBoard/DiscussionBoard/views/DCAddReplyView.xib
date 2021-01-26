@@ -14,10 +14,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eoM-es-RaG">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="126.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8CU-p6-A0b">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="126.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ehf-sn-BKZ">
                                     <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -27,16 +27,16 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juP-tZ-mry">
-                                    <rect key="frame" x="44" y="0.0" width="354" height="106"/>
+                                    <rect key="frame" x="44" y="0.0" width="354" height="126.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Aic-Xu-zHk">
-                                            <rect key="frame" x="12" y="0.0" width="342" height="106"/>
+                                            <rect key="frame" x="12" y="0.0" width="342" height="126.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBh-XL-wSu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="106"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="126.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eka-6j-vjE">
-                                                            <rect key="frame" x="8" y="10" width="326" height="86"/>
+                                                            <rect key="frame" x="8" y="10" width="326" height="106.5"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFx-LP-s99">
                                                                     <rect key="frame" x="0.0" y="0.0" width="326" height="32"/>
@@ -79,8 +79,14 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/2000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MR8-7Z-cmY">
+                                                                    <rect key="frame" x="0.0" y="32" width="326" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvW-NZ-yt7">
-                                                                    <rect key="frame" x="0.0" y="32" width="326" height="54"/>
+                                                                    <rect key="frame" x="0.0" y="52.5" width="326" height="54"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlx-Y8-SU1">
                                                                             <rect key="frame" x="271" y="16" width="55" height="30"/>
@@ -182,6 +188,7 @@
             <connections>
                 <outlet property="editorHeight" destination="4iy-wZ-JCR" id="h9A-ol-UcD"/>
                 <outlet property="editorView" destination="NKN-Tm-SZc" id="c6D-1d-0BG"/>
+                <outlet property="limitLabel" destination="MR8-7Z-cmY" id="O0D-rv-3rW"/>
                 <outlet property="replyAuthorImageView" destination="ehf-sn-BKZ" id="Esn-tL-bK6"/>
                 <outlet property="replyButton" destination="Hlx-Y8-SU1" id="7Vp-pm-ZOS"/>
                 <outlet property="replyView" destination="cvW-NZ-yt7" id="tzm-3q-fEo"/>

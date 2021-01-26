@@ -28,12 +28,11 @@ class DCBasePostView: DCReactionView {
     
     @IBOutlet weak var seeMoreReplyButton: UIButton!
     
-    var editorHelper:EditorHelper!
     let textViewFont = FontHelper.getFontSystem(.small, font: .text)
     var isReplyAll = false
     var didSeeMoreReply: DidAction?
     var replyList:[DiscussionReplyResult]?
-    
+    var index = 0
     var post: DiscussionPostResult? {
         didSet {
             if let post = self.post {
@@ -108,9 +107,7 @@ class DCBasePostView: DCReactionView {
     }
     
     @objc func tapHeader(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard let cell = gestureRecognizer.view as? PostHeaderView else {
-            return
-        }
+        
         
         //delegate?.toggleSection(self, section: cell.section)
     }

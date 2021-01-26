@@ -13,10 +13,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trF-gU-ZOh">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="126.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-tO-Jhh">
-                            <rect key="frame" x="8" y="10" width="398" height="86"/>
+                            <rect key="frame" x="8" y="10" width="398" height="106.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEb-cK-bhW">
                                     <rect key="frame" x="0.0" y="0.0" width="398" height="32"/>
@@ -59,8 +59,14 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/2000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dch-lr-tcT">
+                                    <rect key="frame" x="0.0" y="32" width="398" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXS-p3-wkg">
-                                    <rect key="frame" x="0.0" y="32" width="398" height="54"/>
+                                    <rect key="frame" x="0.0" y="52.5" width="398" height="54"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-B0-8c9">
                                             <rect key="frame" x="275" y="16" width="123" height="30"/>
@@ -147,6 +153,7 @@
                 <outlet property="editView" destination="uEb-cK-bhW" id="Q4p-jY-9H7"/>
                 <outlet property="editorHeight" destination="Rd7-ib-JyN" id="HIL-F2-GM3"/>
                 <outlet property="editorView" destination="NLH-xT-6Yc" id="urK-WW-vmG"/>
+                <outlet property="limitLabel" destination="dch-lr-tcT" id="vdO-d8-bNi"/>
             </connections>
             <point key="canvasLocation" x="71.014492753623188" y="-162.72321428571428"/>
         </view>

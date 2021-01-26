@@ -45,6 +45,9 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var editorToolView2: UIView!
     @IBOutlet var postButton: UIButton!
     
+    @IBOutlet weak var limitLabel: UILabel!
+    let limitCount = 4000
+    
     @IBOutlet var boldButton: UIButton!
     @IBOutlet var italicButton: UIButton!
     @IBOutlet var underlineButton: UIButton!
@@ -246,6 +249,14 @@ extension DiscussionPostViewController: RichEditorDelegate {
             self.postButton.setStyleColor(true, titleColor: .white, bgColor: DCStyle.active())
             self.htmlContent = content
             self.editorBorderView.borderColor = DCStyle.editStart()
+        }
+        
+        DispatchQueue.main.async {
+            let text = editor.html.removeHtml
+            self.limitLabel.text = "\(text.count)/\(self.limitCount)"
+            if text.count > self.limitCount {
+                self.postButton.setStyleColor(false, titleColor: .white, bgColor: DCStyle.disable())
+            }
         }
     }
     
