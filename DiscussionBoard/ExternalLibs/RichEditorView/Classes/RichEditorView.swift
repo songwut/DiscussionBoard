@@ -484,6 +484,8 @@ public class EditorWebView: WKWebView {
     /// - returns: The result of the JavaScript that was run
     
     public func runJS(_ js: String, complete: @escaping (_ result:String) -> ()) {
+        print("js:")
+        print("\(js)")
         webView.evaluateJavaScript(js) { (result, error) in
             if let string = result as? String {
                 complete(string)
