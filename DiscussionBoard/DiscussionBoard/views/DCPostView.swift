@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RichEditorView
 
 class DCPostView: DCBasePostView {
     

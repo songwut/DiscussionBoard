@@ -6,7 +6,6 @@ PODS:
   - Differentiator (5.0.0)
   - IQKeyboardManagerSwift (6.3.0)
   - ObjectMapper (3.5.3)
-  - RichEditorView (5.0.0)
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
     - RxSwift (= 6.0.0)
@@ -26,7 +25,6 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - IQKeyboardManagerSwift (= 6.3.0)
   - ObjectMapper
-  - RichEditorView
   - RxCocoa (= 6.0.0)
   - RxDataSources
   - RxSwift (= 6.0.0)
@@ -39,7 +37,6 @@ SPEC REPOS:
     - Differentiator
     - IQKeyboardManagerSwift
     - ObjectMapper
-    - RichEditorView
     - RxCocoa
     - RxDataSources
     - RxRelay
@@ -52,13 +49,12 @@ SPEC CHECKSUMS:
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
-  RichEditorView: 1bbb07b87ca2d479ac29a6877014b38b8df233ef
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
 
-PODFILE CHECKSUM: 83c2a58d624de7de41adb9aee10a4f4305e80a32
+PODFILE CHECKSUM: 2c91771dba5443ea46e7fbc2c414d7e7411ba88e
 
 COCOAPODS: 1.9.3

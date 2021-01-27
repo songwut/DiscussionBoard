@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RichEditorView
 
 class DCAddReplyView: UIView {
 
@@ -45,8 +44,10 @@ class DCAddReplyView: UIView {
     }
     
     @objc func replyButtonPressed(_ sender: UIButton) {
-        self.didReply?.handler(self.editorView.html)
-        self.editorView.html = ""
+        self.editorView.getHtml { (html) in
+            self.didReply?.handler(html)
+            self.editorView.html = ""
+        }
     }
 }
 

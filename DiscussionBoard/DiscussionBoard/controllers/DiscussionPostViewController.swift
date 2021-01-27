@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RichEditorView
 
 enum DiscussionMenuType: String {
     case latest = "latest_discussion"
@@ -24,6 +23,14 @@ enum DiscussionMenuType: String {
 
 class DiscussionMenuButton: UIButton {
     var type:DiscussionMenuType = DiscussionMenuType.latest
+}
+
+class LineView: UIView {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.backgroundColor = UIColor(hex: "8F9295")
+    }
 }
 
 class DiscussionPostViewController: UIViewController {
@@ -53,6 +60,7 @@ class DiscussionPostViewController: UIViewController {
     @IBOutlet var underlineButton: UIButton!
     @IBOutlet var bulletButton: UIButton!
     @IBOutlet var numberButton: UIButton!
+    @IBOutlet var imageWidth: NSLayoutConstraint!
     
     var htmlContent: String?
     var didLoaded: DidAction?
@@ -294,8 +302,10 @@ extension DiscussionPostViewController: RichEditorToolbarDelegate {
 
     func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar) {
         // Can only add links to selected text, so make sure there is a range selection first
+//TODO: add link + title
+        /*
         if toolbar.editor?.hasRangeSelection == true {
             toolbar.editor?.insertLink("http://github.com/cjwirth/RichEditorView", title: "Github Link")
-        }
+        } */
     }
 }
